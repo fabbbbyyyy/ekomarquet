@@ -1,13 +1,13 @@
 package com.ecomarket_spa.cl.ecomarket_spa.controller;
 
 import com.ecomarket_spa.cl.ecomarket_spa.model.Rol;
+import com.ecomarket_spa.cl.ecomarket_spa.model.Rol;
 import com.ecomarket_spa.cl.ecomarket_spa.service.RolService;
 import com.ecomarket_spa.cl.ecomarket_spa.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +25,34 @@ public class RolController {
         }
         return  ResponseEntity.ok(roles);
     }
+    @PostMapping
+    public ResponseEntity<Rol> guardar(@RequestBody Rol rol){
+        Rol rolNuevo = rolService.save(rol);
+        return ResponseEntity.status(HttpStatus.CREATED).body(rolNuevo);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Rol> buscar(@PathVariable Long id){
+        try{
+            Rol rol = rolService.findById(id);
+            return ResponseEntity.ok(rol);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Rol> actualizar(@PathVariable Long id,@RequestBody Rol rol) {
+        try {
+            Rol roll = rolService.findById(id);
+            roll.setId(id);
+            roll.setNombre(rol.getNombre());
+            roll.setDescripcion(rol.getDescripcion());
+            roll.setPermisosJson(rol.getPermisosJson());
+
+            rolService.save(roll);
+            return ResponseEntity.ok(rol);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
