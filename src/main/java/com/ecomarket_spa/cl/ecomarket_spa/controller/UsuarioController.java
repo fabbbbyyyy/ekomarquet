@@ -16,29 +16,32 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<List<Usuario>>listar(){
-        List<Usuario>usuarios =usuarioService.findAll();
-        if (usuarios.isEmpty()){
+    public ResponseEntity<List<Usuario>> listar() {
+        List<Usuario> usuarios = usuarioService.findAll();
+        if (usuarios.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return  ResponseEntity.ok(usuarios);
+        return ResponseEntity.ok(usuarios);
     }
+
     @PostMapping
-    public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
         Usuario usuarioNuevo = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioNuevo);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscar(@PathVariable Long id){
-        try{
+    public ResponseEntity<Usuario> buscar(@PathVariable Long id) {
+        try {
             Usuario usuario = usuarioService.findById(id);
             return ResponseEntity.ok(usuario);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizar(@PathVariable Long id,@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> actualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
         try {
             Usuario usu = usuarioService.findById(id);
             usu.setId(id);
@@ -58,8 +61,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        try {
             usuarioService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
