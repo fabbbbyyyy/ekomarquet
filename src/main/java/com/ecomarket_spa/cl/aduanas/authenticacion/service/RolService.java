@@ -1,9 +1,7 @@
-package com.ecomarket_spa.cl.ecomarket_spa.service;
+package com.ecomarket_spa.cl.aduanas.authenticacion.service;
 
-import com.ecomarket_spa.cl.ecomarket_spa.model.Rol;
-import com.ecomarket_spa.cl.ecomarket_spa.model.Rol;
-import com.ecomarket_spa.cl.ecomarket_spa.repository.RolRepository;
-import com.ecomarket_spa.cl.ecomarket_spa.repository.RolRepository;
+import com.ecomarket_spa.cl.aduanas.authenticacion.model.Rol;
+import com.ecomarket_spa.cl.aduanas.authenticacion.repository.RolRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

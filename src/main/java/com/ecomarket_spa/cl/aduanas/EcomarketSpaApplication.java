@@ -1,11 +1,7 @@
-package com.ecomarket_spa.cl.ecomarket_spa;
+package com.ecomarket_spa.cl.aduanas;
 
-import com.ecomarket_spa.cl.ecomarket_spa.model.Usuario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 @SpringBootApplication
 public class EcomarketSpaApplication {

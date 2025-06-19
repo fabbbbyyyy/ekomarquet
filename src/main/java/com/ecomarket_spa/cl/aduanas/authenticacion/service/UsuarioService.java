@@ -1,10 +1,10 @@
-package com.ecomarket_spa.cl.ecomarket_spa.service;
+package com.ecomarket_spa.cl.aduanas.authenticacion.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecomarket_spa.cl.ecomarket_spa.model.Usuario;
-import com.ecomarket_spa.cl.ecomarket_spa.repository.UsuarioRepository;
+import com.ecomarket_spa.cl.aduanas.authenticacion.model.Usuario;
+import com.ecomarket_spa.cl.aduanas.authenticacion.repository.UsuarioRepository;
 
 import java.util.List;
 
@@ -25,5 +25,8 @@ public class UsuarioService {
     }
     public void delete(Long id){
         usuarioRepository.deleteById(id);
+    }
+    public Usuario findByCorreo(String correo){
+        return usuarioRepository.findByCorreo(correo);
     }
 }

@@ -1,4 +1,4 @@
-package com.ecomarket_spa.cl.ecomarket_spa.model;
+package com.ecomarket_spa.cl.aduanas.usuarios.model;
 
 
 import jakarta.persistence.*;

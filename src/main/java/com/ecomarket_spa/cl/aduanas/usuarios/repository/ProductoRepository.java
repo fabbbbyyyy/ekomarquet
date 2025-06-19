@@ -1,6 +1,6 @@
-package com.ecomarket_spa.cl.ecomarket_spa.repository;
+package com.ecomarket_spa.cl.aduanas.usuarios.repository;
 
-import com.ecomarket_spa.cl.ecomarket_spa.model.Producto;
+import com.ecomarket_spa.cl.aduanas.usuarios.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
