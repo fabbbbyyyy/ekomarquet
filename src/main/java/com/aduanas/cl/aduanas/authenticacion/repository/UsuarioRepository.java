@@ -1,6 +1,6 @@
-package com.ecomarket_spa.cl.aduanas.authenticacion.repository;
+package com.aduanas.cl.aduanas.authenticacion.repository;
 
-import com.ecomarket_spa.cl.aduanas.authenticacion.model.Usuario;
+import com.aduanas.cl.aduanas.authenticacion.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

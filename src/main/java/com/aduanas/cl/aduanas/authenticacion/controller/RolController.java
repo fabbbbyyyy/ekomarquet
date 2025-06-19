@@ -1,7 +1,7 @@
-package com.ecomarket_spa.cl.aduanas.authenticacion.controller;
+package com.aduanas.cl.aduanas.authenticacion.controller;
 
-import com.ecomarket_spa.cl.aduanas.authenticacion.model.Rol;
-import com.ecomarket_spa.cl.aduanas.authenticacion.service.RolService;
+import com.aduanas.cl.aduanas.authenticacion.model.Rol;
+import com.aduanas.cl.aduanas.authenticacion.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

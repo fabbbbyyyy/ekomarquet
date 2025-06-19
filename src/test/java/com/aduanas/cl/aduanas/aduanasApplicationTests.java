@@ -1,10 +1,10 @@
-package com.ecomarket_spa.cl.aduanas;
+package com.aduanas.cl.aduanas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EcomarketSpaApplicationTests {
+class aduanasApplicationTests {
 
 	@Test
 	void contextLoads() {

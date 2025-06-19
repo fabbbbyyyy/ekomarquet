@@ -1,4 +1,4 @@
-package com.ecomarket_spa.cl.aduanas.authenticacion.model;
+package com.aduanas.cl.aduanas.authenticacion.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

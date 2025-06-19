@@ -1,13 +1,13 @@
-package com.ecomarket_spa.cl.aduanas;
+package com.aduanas.cl.aduanas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcomarketSpaApplication {
+public class aduanasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcomarketSpaApplication.class, args);
+		SpringApplication.run(aduanasApplication.class, args);
 	}
 
 }

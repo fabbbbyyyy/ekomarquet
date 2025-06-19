@@ -1,10 +1,9 @@
-package com.ecomarket_spa.cl.aduanas.authenticacion.service;
-
+package com.aduanas.cl.aduanas.authenticacion.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecomarket_spa.cl.aduanas.authenticacion.model.Usuario;
-import com.ecomarket_spa.cl.aduanas.authenticacion.repository.UsuarioRepository;
+import com.aduanas.cl.aduanas.authenticacion.model.Usuario;
+import com.aduanas.cl.aduanas.authenticacion.repository.UsuarioRepository;
 
 import java.util.List;
 
