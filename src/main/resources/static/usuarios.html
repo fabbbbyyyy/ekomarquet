@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración de Usuarios</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Lista de Usuarios (Solo Administrador)</h1>
+    <div id="usuario-autenticado"></div>
+    <div id="enlaces-usuarios">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a> |
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="usuarios"></div>
+    <script src="/js/app.js"></script>
+    <script>
+    // Lógica de navegación según sesión
+    if (!localStorage.getItem('jwt')) {
+        // Si no hay sesión, redirigir automáticamente al login
+        window.location.href = '/login.html';
+    } else {
+        document.getElementById('enlaces-sesion').style.display = 'inline';
+        document.getElementById('btn-cerrar-sesion').onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+    }
+    </script>
+</body>
+</html>

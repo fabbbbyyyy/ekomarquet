@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trámite Menores - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Trámite para Menores</h1>
+    <div id="enlaces-menores">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-tramite-menores">
+        <form id="form-tramite-menores">
+            <label for="nombre-menor">Nombre del menor:</label>
+            <input type="text" id="nombre-menor" name="nombre-menor" required><br>
+            <label for="edad-menor">Edad:</label>
+            <input type="number" id="edad-menor" name="edad-menor" required><br>
+            <button type="submit">Registrar</button>
+        </form>
+        <div id="mensaje-tramite-menores"></div>
+    </div>
+    <script src="js/tramite_menores.js"></script>
+</body>
+</html>

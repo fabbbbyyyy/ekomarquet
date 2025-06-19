@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Bienvenido al sistema de Aduanas</h1>
+    <p>Por favor, inicia sesión para acceder a las funcionalidades protegidas.</p>
+    <div id="enlaces-index"></div>
+    <script>
+    function renderEnlacesIndex() {
+        const contenedor = document.getElementById('enlaces-index');
+        contenedor.innerHTML = '';
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+            // Usuario autenticado
+            const dashboard = document.createElement('a');
+            dashboard.href = '/dashboard.html';
+            dashboard.textContent = 'Ir al Dashboard';
+            contenedor.appendChild(dashboard);
+            contenedor.appendChild(document.createTextNode(' '));
+            const btnCerrar = document.createElement('button');
+            btnCerrar.id = 'btn-cerrar-sesion';
+            btnCerrar.style.marginLeft = '10px';
+            btnCerrar.textContent = 'Cerrar sesión';
+            btnCerrar.onclick = function() {
+                localStorage.removeItem('jwt');
+                location.reload();
+            };
+            contenedor.appendChild(btnCerrar);
+        } else {
+            // Usuario no autenticado
+            const enlaces = [
+                { href: '/login.html', texto: 'Ir a Login' },
+                { href: '/registro.html', texto: 'Registrarse' },
+                { href: '/recuperar_contrasena.html', texto: '¿Olvidaste tu contraseña?' }
+            ];
+            enlaces.forEach((enlace, idx) => {
+                const a = document.createElement('a');
+                a.href = enlace.href;
+                a.id = 'enlace-' + enlace.texto.toLowerCase().replace(/ /g, '-');
+                a.textContent = enlace.texto;
+                contenedor.appendChild(a);
+                if (idx < enlaces.length - 1) {
+                    contenedor.appendChild(document.createTextNode(' | '));
+                }
+            });
+        }
+    }
+    document.addEventListener('DOMContentLoaded', renderEnlacesIndex);
+    </script>
+</body>
+</html>

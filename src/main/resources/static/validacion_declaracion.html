@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación Declaración - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Validación de Declaración</h1>
+    <div id="enlaces-validacion-declaracion">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-validacion-declaracion">
+        <form id="form-validacion-declaracion">
+            <label for="declaracion-id">ID de declaración:</label>
+            <input type="text" id="declaracion-id" name="declaracion-id" required><br>
+            <label for="estado">Estado de validación:</label>
+            <select id="estado" name="estado" required>
+                <option value="pendiente">Pendiente</option>
+                <option value="validado">Validado</option>
+                <option value="rechazado">Rechazado</option>
+            </select><br>
+            <button type="submit" disabled>Validar (plantilla)</button>
+        </form>
+    </div>
+    <div id="tramites-declaracion"></div>
+    <script src="js/validacion_declaracion.js"></script>
+</body>
+</html>

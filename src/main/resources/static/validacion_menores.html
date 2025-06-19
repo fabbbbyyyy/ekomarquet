@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación Menores - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Validación de Menores</h1>
+    <div id="enlaces-validacion-menores">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <form id="form-validacion-menores">
+        <label for="rut-menor">RUT del menor:</label>
+        <input type="text" id="rut-menor" name="rut-menor" required><br>
+        <label for="estado">Estado de validación:</label>
+        <select id="estado" name="estado" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="validado">Validado</option>
+            <option value="rechazado">Rechazado</option>
+        </select><br>
+        <button type="submit" disabled>Validar (plantilla)</button>
+    </form>
+    <div id="tramites-menores"></div>
+    <script src="js/validacion_menores.js"></script>
+</body>
+</html>

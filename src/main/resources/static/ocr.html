@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingresar OCR - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Ingresar OCR</h1>
+    <div id="enlaces-ocr">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <form id="form-ocr">
+        <label for="codigo-ocr">Código OCR:</label>
+        <input type="text" id="codigo-ocr" name="codigo-ocr" required><br>
+        <label for="descripcion-ocr">Descripción:</label>
+        <input type="text" id="descripcion-ocr" name="descripcion-ocr" required><br>
+        <button type="submit" disabled>Enviar (plantilla)</button>
+    </form>
+    <script>
+    if (!localStorage.getItem('jwt')) {
+        window.location.href = '/login.html';
+    } else {
+        document.getElementById('enlaces-sesion').style.display = 'inline';
+        document.getElementById('btn-cerrar-sesion').onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+        // Mostrar contenido completo si es admin
+        const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
+        if (payload.rolId != 4 && payload.rolId != 5 && payload.rolId != 1) {
+            document.getElementById('form-ocr').style.display = 'none';
+            document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para viajeros, transportistas o administradores.</p>');
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trámite Vehículo - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Trámite para Vehículo</h1>
+    <div id="enlaces-vehiculo">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-tramite-vehiculo">
+        <form id="form-tramite-vehiculo">
+            <label for="patente-vehiculo">Patente del vehículo:</label>
+            <input type="text" id="patente-vehiculo" name="patente-vehiculo" required><br>
+            <label for="marca-vehiculo">Marca:</label>
+            <input type="text" id="marca-vehiculo" name="marca-vehiculo" required><br>
+            <label for="modelo-vehiculo">Modelo:</label>
+            <input type="text" id="modelo-vehiculo" name="modelo-vehiculo" required><br>
+            <button type="submit">Registrar</button>
+        </form>
+        <div id="mensaje-tramite-vehiculo"></div>
+    </div>
+    <script src="js/tramite_vehiculo.js"></script>
+</body>
+</html>
+

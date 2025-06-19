@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Registro de Usuario</h1>
+    <form id="registro-form">
+        <label for="rut">RUT:</label>
+        <input type="text" id="rut" name="rut" required maxlength="10"><br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required><br>
+        <label for="contra">Contraseña:</label>
+        <input type="password" id="contra" name="contra" required><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br>
+        <label for="rol">Tipo de usuario:</label>
+        <select id="rol" name="rol" required>
+            <option value="4">Viajero</option>
+            <option value="5">Transportista</option>
+        </select><br>
+        <button type="submit">Registrarse</button>
+    </form>
+    <div id="mensaje-registro" style="color:green;"></div>
+    <div id="enlaces-registro">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/login.html" id="enlace-login">Ir a Login</a> |
+        <a href="/recuperar_contrasena.html">¿Olvidaste tu contraseña?</a>
+        <span id="enlaces-sesion" style="display:none;">
+            | <a href="/dashboard.html">Ir al Dashboard</a>
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <script src="/js/registro.js"></script>
+    <script>
+    // Lógica de navegación según sesión
+    if (localStorage.getItem('jwt')) {
+        // Si hay sesión, redirigir automáticamente al dashboard
+        window.location.href = '/dashboard.html';
+    } else {
+        document.getElementById('enlace-login').style.display = 'inline';
+        document.getElementById('enlaces-sesion').style.display = 'none';
+    }
+    </script>
+</body>
+</html>

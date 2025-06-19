@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informes - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Informes</h1>
+    <div id="enlaces-informes">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-informes">
+        <p>Página de informes (plantilla).</p>
+    </div>
+    <script>
+    if (!localStorage.getItem('jwt')) {
+        window.location.href = '/login.html';
+    } else {
+        document.getElementById('enlaces-sesion').style.display = 'inline';
+        document.getElementById('btn-cerrar-sesion').onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+    }
+    </script>
+</body>
+</html>
+
