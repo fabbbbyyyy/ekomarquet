@@ -39,6 +39,8 @@ public class SecurityConfig {
                 .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/v1/tramites/**").hasAnyAuthority("ADMIN", "VIAJERO", "TRANSPORTISTA")
                 .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/v1/tramites/**").hasAnyAuthority("ADMIN")
                 .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/v1/tramites/**").hasAnyAuthority("ADMIN")
+                // Permitir PATCH solo a admin, inspector y funcionario
+                .requestMatchers(org.springframework.http.HttpMethod.PATCH, "/api/v1/tramites/**").hasAnyAuthority("ADMIN", "INSPECTOR", "FUNCIONARIO")
                 // El resto requiere autenticación (usuarios normales pueden ver otras páginas protegidas)
                 .anyRequest().authenticated()
             )

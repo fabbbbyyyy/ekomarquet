@@ -30,5 +30,9 @@ public class Tramite {
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
+    private EstadoTramite estado = EstadoTramite.NO_REVISADO;
+
     // Puedes agregar más campos según necesidad
 }

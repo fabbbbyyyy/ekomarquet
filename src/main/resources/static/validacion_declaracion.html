@@ -6,28 +6,37 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Validación de Declaración</h1>
-    <div id="enlaces-validacion-declaracion">
-        <a href="/index.html">Ir al inicio</a> |
-        <a href="/dashboard.html">Ir al Dashboard</a>
-        <span id="enlaces-sesion" style="display:none;">
+<h1>Validación de Declaración</h1>
+<div id="enlaces-validacion-declaracion">
+    <a href="/index.html">Ir al inicio</a> |
+    <a href="/dashboard.html">Ir al Dashboard</a>
+    <span id="enlaces-sesion" style="display:none;">
             <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
         </span>
-    </div>
-    <div id="contenido-validacion-declaracion">
-        <form id="form-validacion-declaracion">
-            <label for="declaracion-id">ID de declaración:</label>
-            <input type="text" id="declaracion-id" name="declaracion-id" required><br>
-            <label for="estado">Estado de validación:</label>
-            <select id="estado" name="estado" required>
-                <option value="pendiente">Pendiente</option>
-                <option value="validado">Validado</option>
-                <option value="rechazado">Rechazado</option>
-            </select><br>
-            <button type="submit" disabled>Validar (plantilla)</button>
-        </form>
-    </div>
+</div>
+<div id="contenido-validacion-declaracion">
+    <form id="form-validacion-declaracion">
+        <label for="declaracion-id">ID de declaración:</label>
+        <input type="text" id="declaracion-id" name="declaracion-id" required><br>
+        <label for="estado">Estado de validación:</label>
+        <select id="estado" name="estado" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="validado">Validado</option>
+            <option value="rechazado">Rechazado</option>
+        </select><br>
+        <button type="submit" disabled>Validar (plantilla)</button>
+    </form>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 30px;">
     <div id="tramites-declaracion"></div>
-    <script src="js/validacion_declaracion.js"></script>
+    <div id="panel-accion-declaracion" style="min-width:200px;">
+        <label for="accion-id">ID de declaración:</label>
+        <input type="text" id="accion-id" name="accion-id"><br><br>
+        <button id="btn-aceptar" type="button">Aceptar</button>
+        <button id="btn-rechazar" type="button" style="margin-left:10px;">Rechazar</button>
+        <div id="accion-resultado" style="margin-top:10px;color:green;"></div>
+    </div>
+</div>
+<script src="js/validacion_declaracion.js"></script>
 </body>
 </html>

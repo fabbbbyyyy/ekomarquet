@@ -64,6 +64,8 @@ function generarEnlacesDashboard() {
         { id: 'enlace-ocr', href: '/ocr.html', texto: 'Ingresar OCR', mostrar: p => [1,4,5].includes(p.rolId) },
         { id: 'enlace-validacion-vehiculos', href: '/validacion_vehiculos.html', texto: 'Validación Vehiculos', mostrar: p => p.rolId == 1 || p.rolId == 2 },
         { id: 'enlace-validacion-declaracion', href: '/validacion_declaracion.html', texto: 'Validación Declaración', mostrar: p => p.rolId == 1 || p.rolId == 2 },
+        { id: 'enlace-validacion-mascotas', href: '/validacion_mascotas.html', texto: 'Validación Mascotas', mostrar: p => p.rolId == 2 },
+        { id: 'enlace-tramite-mascota', href: '/tramite_mascota.html', texto: 'Trámite Mascota', mostrar: p => p.rolId == 3 || p.rolId == 4 },
     ];
     const token = localStorage.getItem('jwt');
     if (!token) return;

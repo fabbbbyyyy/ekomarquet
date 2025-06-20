@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trámite Mascota - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Trámite Mascota</h1>
+    <div id="enlaces-tramite-mascota">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-tramite-mascota">
+        <form id="form-tramite-mascota">
+            <label for="nombre-mascota">Nombre de la mascota:</label>
+            <input type="text" id="nombre-mascota" name="nombre-mascota" required><br>
+            <label for="tipo-mascota">Tipo de mascota:</label>
+            <input type="text" id="tipo-mascota" name="tipo-mascota" required><br>
+            <button type="submit">Registrar Trámite</button>
+        </form>
+        <div id="mensaje-tramite-mascota"></div>
+        <div id="tramites-mascota"></div>
+    </div>
+    <script src="js/tramite_mascota.js"></script>
+</body>
+</html>
+

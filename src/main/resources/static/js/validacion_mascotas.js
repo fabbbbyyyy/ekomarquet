@@ -9,32 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/index.html';
     };
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
-    if (payload.rolId != 2 && payload.rolId != 1) {
-        document.getElementById('contenido-validacion-declaracion').style.display = 'none';
-        document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para inspectores o administradores.</p>');
+    if (payload.rolId != 2) {
+        document.getElementById('contenido-validacion-mascotas').style.display = 'none';
+        document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para inspectores.</p>');
         return;
     }
-    cargarTramites();
+    cargarTramitesMascotas();
 
-    document.getElementById('btn-aceptar').onclick = function() {
-        actualizarEstado('ACEPTADO');
+    document.getElementById('btn-aceptar-mascota').onclick = function() {
+        actualizarEstadoMascota('ACEPTADO');
     };
-    document.getElementById('btn-rechazar').onclick = function() {
-        actualizarEstado('RECHAZADO');
+    document.getElementById('btn-rechazar-mascota').onclick = function() {
+        actualizarEstadoMascota('RECHAZADO');
     };
 });
 
-let tramitesCache = [];
-let idsValidos = [];
+let tramitesMascotasCache = [];
+let idsMascotasValidos = [];
 
-function renderTabla(tramites) {
-    const div = document.getElementById('tramites-declaracion');
+function renderTablaMascotas(tramites) {
+    const div = document.getElementById('tramites-mascotas');
     if (!tramites.length) {
-        div.innerHTML = '<p>No hay declaraciones SAG registradas.</p>';
-        idsValidos = [];
+        div.innerHTML = '<p>No hay trámites de mascotas registrados.</p>';
+        idsMascotasValidos = [];
         return;
     }
-    idsValidos = tramites.map(t => t.id);
+    idsMascotasValidos = tramites.map(t => t.id);
     let html = '<table><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>';
     tramites.forEach(t => {
         html += `<tr><td>${t.id}</td><td>${t.descripcion}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
@@ -43,24 +43,24 @@ function renderTabla(tramites) {
     div.innerHTML = html;
 }
 
-function cargarTramites() {
-    fetch('/api/v1/tramites/tipo/3', {
+function cargarTramitesMascotas() {
+    fetch('/api/v1/tramites/tipo/4', {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwt') }
     })
     .then(r => r.json())
     .then(tramites => {
-        tramitesCache = tramites;
-        renderTabla(tramitesCache);
+        tramitesMascotasCache = tramites;
+        renderTablaMascotas(tramitesMascotasCache);
     })
     .catch(() => {
-        document.getElementById('tramites-declaracion').innerHTML = '<p style="color:red">Error al cargar las declaraciones.</p>';
+        document.getElementById('tramites-mascotas').innerHTML = '<p style="color:red">Error al cargar los trámites.</p>';
     });
 }
 
-function actualizarEstado(nuevoEstado) {
-    const id = document.getElementById('accion-id').value.trim();
-    const resultado = document.getElementById('accion-resultado');
-    if (!id || !idsValidos.includes(Number(id))) {
+function actualizarEstadoMascota(nuevoEstado) {
+    const id = document.getElementById('accion-id-mascota').value.trim();
+    const resultado = document.getElementById('accion-resultado-mascota');
+    if (!id || !idsMascotasValidos.includes(Number(id))) {
         resultado.style.color = 'red';
         resultado.textContent = 'Ingrese una ID válida que esté en la tabla.';
         return;
@@ -77,7 +77,7 @@ function actualizarEstado(nuevoEstado) {
         if (r.ok) {
             resultado.style.color = 'green';
             resultado.textContent = `Estado actualizado a ${nuevoEstado}`;
-            cargarTramites();
+            cargarTramitesMascotas();
         } else if (r.status === 404) {
             resultado.style.color = 'red';
             resultado.textContent = 'ID no encontrada en la base de datos.';

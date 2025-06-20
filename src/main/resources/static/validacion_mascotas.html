@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación Mascotas - Aduanas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Validación de Mascotas</h1>
+    <div id="enlaces-validacion-mascotas">
+        <a href="/index.html">Ir al inicio</a> |
+        <a href="/dashboard.html">Ir al Dashboard</a>
+        <span id="enlaces-sesion" style="display:none;">
+            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
+        </span>
+    </div>
+    <div id="contenido-validacion-mascotas">
+        <div style="display: flex; align-items: flex-start; gap: 30px;">
+            <div id="tramites-mascotas"></div>
+            <div id="panel-accion-mascotas" style="min-width:200px;">
+                <label for="accion-id-mascota">ID de trámite:</label>
+                <input type="text" id="accion-id-mascota" name="accion-id-mascota"><br><br>
+                <button id="btn-aceptar-mascota" type="button">Aceptar</button>
+                <button id="btn-rechazar-mascota" type="button" style="margin-left:10px;">Rechazar</button>
+                <div id="accion-resultado-mascota" style="margin-top:10px;color:green;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/validacion_mascotas.js"></script>
+</body>
+</html>
+

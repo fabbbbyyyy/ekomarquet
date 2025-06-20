@@ -89,4 +89,30 @@ public class TramiteController {
         tramiteService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<?> actualizarEstado(@PathVariable Long id, @RequestBody EstadoRequest estadoRequest, HttpServletRequest request) {
+        System.out.println("PATCH /api/v1/tramites/" + id + "/estado llamado por usuario: " + (request.getAttribute("claims") != null ? ((Claims)request.getAttribute("claims")).getSubject() : "desconocido"));
+        Tramite tramite = tramiteService.findById(id);
+        if (tramite == null) {
+            System.out.println("Trámite no encontrado para id: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trámite no encontrado");
+        }
+        String nuevoEstado = estadoRequest.getEstado();
+        System.out.println("Nuevo estado recibido: " + nuevoEstado);
+        if (!"ACEPTADO".equals(nuevoEstado) && !"RECHAZADO".equals(nuevoEstado) && !"NO_REVISADO".equals(nuevoEstado)) {
+            System.out.println("Estado inválido: " + nuevoEstado);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Estado inválido");
+        }
+        tramite.setEstado(com.aduanas.cl.aduanas.tramites.model.EstadoTramite.valueOf(nuevoEstado));
+        tramiteService.save(tramite);
+        System.out.println("Estado actualizado correctamente en la base de datos.");
+        return ResponseEntity.ok().body("Estado actualizado a " + nuevoEstado);
+    }
+
+    public static class EstadoRequest {
+        private String estado;
+        public String getEstado() { return estado; }
+        public void setEstado(String estado) { this.estado = estado; }
+    }
 }
