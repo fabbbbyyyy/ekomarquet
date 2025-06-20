@@ -30,6 +30,9 @@ document.getElementById('registro-form').addEventListener('submit', async functi
         if (response.ok) {
             mensaje.textContent = '¡Registro exitoso! Ahora puedes iniciar sesión.';
             document.getElementById('registro-form').reset();
+            setTimeout(function() {
+                window.location.href = '/index.html';
+            }, 1500); // Espera 1.5 segundos antes de redirigir
         } else {
             const error = await response.text();
             mensaje.style.color = 'red';
@@ -40,4 +43,3 @@ document.getElementById('registro-form').addEventListener('submit', async functi
         mensaje.textContent = 'Error de conexión con el servidor';
     }
 });
-
