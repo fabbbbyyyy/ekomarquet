@@ -107,6 +107,36 @@ public class UsuarioController {
         }
     }
 
+    // Endpoint para cambiar solo el rol de un usuario
+    /**
+     * Cambia el rol de un usuario específico.
+     * Solo accesible por administradores.
+     * @param request HttpServletRequest para extraer claims del JWT
+     * @param id ID del usuario a modificar
+     * @param nuevoRol Objeto Rol con el nuevo rol a asignar
+     * @return ResponseEntity con el usuario actualizado o error
+     */
+    @PutMapping("/{id}/rol")
+    public ResponseEntity<?> cambiarRol(HttpServletRequest request, @PathVariable Long id, @RequestBody com.aduanas.cl.aduanas.authenticacion.model.Rol nuevoRol) {
+        Claims claims = (Claims) request.getAttribute("claims");
+        // Verifica que el usuario autenticado sea administrador
+        if (!isAdmin(claims)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acceso denegado: se requiere rol de administrador");
+        }
+        try {
+            // Busca el usuario por ID
+            Usuario usuario = usuarioService.findById(id);
+            // Asigna el nuevo rol
+            usuario.setRol(nuevoRol);
+            // Guarda el usuario actualizado
+            usuarioService.save(usuario);
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            // Si el usuario no existe, retorna 404
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(HttpServletRequest request, @PathVariable Long id) {
         Claims claims = (Claims) request.getAttribute("claims");
