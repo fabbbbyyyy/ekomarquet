@@ -38,20 +38,12 @@ function mostrarUsuarioAutenticado() {
     }
 }
 
-function configurarDashboard() {
-    const token = checkAuth();
-    if (!token) return;
-    const payload = parseJwt(token);
-    // Mostrar botón de usuarios solo si es admin
-    if (payload && payload.rolId == 1) {
-        document.getElementById('btn-usuarios').style.display = 'inline-block';
-    }
-}
-
 function generarEnlacesDashboard() {
     const enlaces = [
         { id: 'enlace-inicio', href: '/index.html', texto: 'Ir al inicio', mostrar: () => true },
         { id: 'enlace-usuarios', href: '/usuarios.html', texto: 'Administrar Usuarios', mostrar: p => p.rolId == 1 },
+        // Enlace solo visible para el administrador
+        { id: 'enlace-gestion-roles', href: '/gestion_roles.html', texto: 'Gestión de Roles', mostrar: p => p.rolId == 1 },
         { id: 'enlace-validacion-menores', href: '/validacion_menores.html', texto: 'Validación Menores', mostrar: p => p.rolId == 1 || p.rolId == 3 },
         { id: 'enlace-analisis-ia', href: '/analisis_ia.html', texto: 'Análisis IA', mostrar: p => p.rolId == 1 || p.rolId == 3 },
         { id: 'enlace-colas', href: '/gestion_colas.html', texto: 'Gestión de Colas', mostrar: p => p.rolId == 1 },
@@ -101,13 +93,9 @@ function generarEnlacesDashboard() {
 
 document.addEventListener('DOMContentLoaded', function() {
     mostrarUsuarioAutenticado();
-    configurarDashboard();
     generarEnlacesDashboard();
     document.getElementById('btn-cerrar-sesion').addEventListener('click', function() {
         localStorage.removeItem('jwt');
         window.location.href = '/login.html';
-    });
-    document.getElementById('btn-usuarios').addEventListener('click', function() {
-        window.location.href = '/usuarios.html';
     });
 });
