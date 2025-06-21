@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     cargarTramitesMascotas();
 
-    document.getElementById('btn-aceptar-mascota').onclick = function() {
+    document.getElementById('btn-aceptar').onclick = function() {
         actualizarEstadoMascota('ACEPTADO');
     };
-    document.getElementById('btn-rechazar-mascota').onclick = function() {
+    document.getElementById('btn-rechazar').onclick = function() {
         actualizarEstadoMascota('RECHAZADO');
     };
 });
@@ -35,11 +35,11 @@ function renderTablaMascotas(tramites) {
         return;
     }
     idsMascotasValidos = tramites.map(t => t.id);
-    let html = '<table><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>';
+    let html = '<table id="tabla-tramites-mascotas" border="1" style="margin-top:20px;width:100%;"><thead><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
     tramites.forEach(t => {
         html += `<tr><td>${t.id}</td><td>${t.descripcion}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
     });
-    html += '</table>';
+    html += '</tbody></table>';
     div.innerHTML = html;
 }
 
@@ -58,8 +58,8 @@ function cargarTramitesMascotas() {
 }
 
 function actualizarEstadoMascota(nuevoEstado) {
-    const id = document.getElementById('accion-id-mascota').value.trim();
-    const resultado = document.getElementById('accion-resultado-mascota');
+    const id = document.getElementById('accion-id').value.trim();
+    const resultado = document.getElementById('accion-resultado');
     if (!id || !idsMascotasValidos.includes(Number(id))) {
         resultado.style.color = 'red';
         resultado.textContent = 'Ingrese una ID válida que esté en la tabla.';
