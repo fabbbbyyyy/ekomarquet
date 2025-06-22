@@ -66,6 +66,7 @@ function generarEnlacesDashboard() {
     const contenedor = document.getElementById('enlaces-dashboard');
     contenedor.innerHTML = '';
     let enlacesVisibles = enlaces.filter(e => e.mostrar(payload));
+    enlacesVisibles = enlacesVisibles.filter(e => e.id !== 'enlace-mascota');
     enlacesVisibles.forEach((enlace, idx) => {
         const a = document.createElement('a');
         a.href = enlace.href;
