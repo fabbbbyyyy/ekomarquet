@@ -27,7 +27,6 @@
         </form>
         <div class="navbar-nav me-lg-2">
             <div class="nav-item text-nowrap d-flex align-items-center">
-                <!-- Notificaciones y menú de usuario igual que en gestion_roles.html -->
                 <div class="dropdown ps-3">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
                         <i class="bi-bell"></i>
@@ -193,6 +192,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tramite_menores.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/sidebar.js"></script>
     <script>
     // Mostrar nombre y correo en el banner superior desde el token
@@ -222,10 +222,10 @@
                 }
             }
         }
-        // Logout desde el sidebar
-        var sidebarLogout = document.getElementById('sidebar-logout-btn');
-        if (sidebarLogout) {
-            sidebarLogout.addEventListener('click', function(e) {
+        // Logout desde el dropdown
+        var logoutBtn = document.getElementById('dropdown-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 localStorage.removeItem('jwt');
                 window.location.href = '/login.html';
@@ -233,7 +233,7 @@
         }
         // Sidebar dinámico igual que dashboard
         if (typeof generarEnlacesDashboard === 'function') {
-            generarEnlacesDashboard('tramite_menores');
+            generarEnlacesDashboard();
         } else if (typeof generarEnlacesSidebar === 'function') {
             generarEnlacesSidebar('tramite_menores');
         }

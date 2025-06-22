@@ -99,5 +99,11 @@ function generarEnlacesSidebar() {
 
 document.addEventListener('DOMContentLoaded', function() {
     generarEnlacesSidebar();
+    // Ocultar el enlace de Trámite Menores en el sidebar si existe (para tramite_menores.html)
+    if (window.location.pathname.endsWith('/tramite_menores.html')) {
+        setTimeout(function() {
+            var enlaceMenores = document.getElementById('enlace-menores');
+            if (enlaceMenores) enlaceMenores.style.display = 'none';
+        }, 200);
+    }
 });
-
