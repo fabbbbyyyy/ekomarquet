@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/index.html';
     };
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
-    if (!(payload.rolId == 3 || payload.rolId == 4)) {
+    if (!(payload.rolId == 1 || payload.rolId == 3 || payload.rolId == 4)) {
         document.getElementById('contenido-tramite-mascota').style.display = 'none';
-        document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para funcionarios o viajeros.</p>');
+        document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para funcionarios, viajeros o administradores.</p>');
         return;
     }
     cargarTramitesMascota();
@@ -87,4 +87,3 @@ function registrarTramiteMascota() {
         mensaje.textContent = 'Error de red al registrar el trámite.';
     });
 }
-

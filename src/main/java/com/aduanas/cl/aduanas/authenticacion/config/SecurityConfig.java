@@ -24,7 +24,7 @@ public class SecurityConfig {
                     "/login.html",
                     "/css/**",
                     "/js/**",
-                    "/img/**",
+                    "/images/**","/fonts/**",
                     "/api/v1/auth/login",
                     "/favicon.ico","/api/v1/usuarios/registro"
                 ).permitAll()

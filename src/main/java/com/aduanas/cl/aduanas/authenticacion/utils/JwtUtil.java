@@ -27,6 +27,8 @@ public class JwtUtil {
                 .setSubject(usuario.getCorreo())
                 .claim("rolId", usuario.getRol().getId())
                 .claim("userId", usuario.getId())
+                .claim("nombre", usuario.getNombre()) // Agrega el nombre al JWT
+                .claim("email", usuario.getCorreo()) // Agrega el correo explícitamente como claim
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)

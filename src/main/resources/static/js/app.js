@@ -74,6 +74,38 @@ async function cargarUsuarios() {
     }
 }
 
+// Nueva función para integración con usuarios.html
+function obtenerUsuarios(callback) {
+    const token = checkAuth();
+    if (!token) return callback([]);
+    const payload = parseJwt(token);
+    if (!payload || payload.rolId != 1) return callback([]);
+    fetch('/api/v1/usuarios', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (!response.ok) return [];
+        return response.json();
+    })
+    .then(usuarios => {
+        // Normaliza el formato para la tabla
+        const lista = usuarios.map(usuario => ({
+            id: usuario.id,
+            nombre: usuario.nombre || usuario.firstName || '',
+            correo: usuario.correo || usuario.email || '',
+            rolId: usuario.rolId || (usuario.rol && usuario.rol.id) || '',
+        }));
+        callback(lista);
+    })
+    .catch(() => callback([]));
+}
+
 function cerrarSesion() {
     localStorage.removeItem('jwt');
     window.location.href = '/login.html';

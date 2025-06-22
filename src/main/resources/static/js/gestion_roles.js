@@ -50,7 +50,7 @@ async function cargarUsuarios() {
     const payload = parseJwt(token);
     // Solo permite acceso a administradores
     if (!payload || payload.rolId != 1) {
-        document.getElementById('gestion-roles').innerHTML = '<p style="color:red">Acceso denegado. Solo los administradores pueden ver esta página.</p>';
+        document.getElementById('tabla-usuarios-roles').innerHTML = '<tr><td colspan="7" style="color:red">Acceso denegado. Solo los administradores pueden ver esta página.</td></tr>';
         return;
     }
     try {
@@ -67,19 +67,18 @@ async function cargarUsuarios() {
         ]);
         mostrarTablaUsuarios(usuarios, roles);
     } catch (error) {
-        document.getElementById('gestion-roles').innerHTML = '<p style="color:red">Error al cargar usuarios o roles</p>';
+        document.getElementById('tabla-usuarios-roles').innerHTML = '<tr><td colspan="7" style="color:red">Error al cargar usuarios o roles</td></tr>';
     }
 }
 
 // Muestra la tabla de usuarios con un selector de roles para cada uno
 function mostrarTablaUsuarios(usuarios, roles) {
-    let html = `<table border="1" style="width:100%;text-align:left;">
-        <thead>
-            <tr>
-                <th>ID</th><th>Nombre</th><th>Apellido</th><th>Correo</th><th>RUT</th><th>Rol</th><th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>`;
+    let html = `<thead>
+        <tr>
+            <th>ID</th><th>Nombre</th><th>Apellido</th><th>Correo</th><th>RUT</th><th>Rol</th><th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>`;
     usuarios.forEach(usuario => {
         html += `<tr>
             <td>${usuario.id}</td>
@@ -88,15 +87,16 @@ function mostrarTablaUsuarios(usuarios, roles) {
             <td>${usuario.correo}</td>
             <td>${usuario.rut}</td>
             <td>
-                <select data-user-id="${usuario.id}" class="selector-rol">
+                <select data-user-id="${usuario.id}" class="form-select selector-rol">
                     ${roles.map(rol => `<option value="${rol.id}" ${usuario.rol && usuario.rol.id === rol.id ? 'selected' : ''}>${rol.nombre}</option>`).join('')}
                 </select>
             </td>
-            <td><button class="btn-guardar-rol" data-user-id="${usuario.id}">Guardar</button></td>
+            <td><button class="btn btn-primary btn-sm btn-guardar-rol" data-user-id="${usuario.id}">Guardar</button></td>
         </tr>`;
     });
-    html += '</tbody></table>';
-    document.getElementById('gestion-roles').innerHTML = html;
+    html += '</tbody>';
+    const tabla = document.getElementById('tabla-usuarios-roles');
+    tabla.innerHTML = html;
     agregarEventosCambioRol(roles);
 }
 
@@ -143,9 +143,5 @@ function agregarEventosCambioRol(roles) {
 
 document.addEventListener('DOMContentLoaded', () => {
     mostrarUsuarioAutenticado();
-    document.getElementById('btn-cerrar-sesion').addEventListener('click', function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/login.html';
-    });
     cargarUsuarios();
 });
