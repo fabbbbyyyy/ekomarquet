@@ -1,38 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tooplate">
     <title>Monitoreo de Demoras - Aduanas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Monitoreo de Demoras</h1>
-    <div id="enlaces-monitoreo-demoras">
-        <a href="/index.html">Ir al inicio</a> |
-        <a href="/dashboard.html">Ir al Dashboard</a>
-        <span id="enlaces-sesion" style="display:none;">
-            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
-        </span>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi-box"></i>
+                Aduanas
+            </a>
+        </div>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav me-lg-2">
+            <div class="nav-item text-nowrap d-flex align-items-center">
+                <div class="dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="images/medium-shot-happy-man-smiling.jpg" class="profile-image img-fluid" alt="">
+                    </a>
+                    <ul class="dropdown-menu bg-white shadow">
+                        <li>
+                            <div class="dropdown-menu-profile-thumb d-flex">
+                                <img src="images/medium-shot-happy-man-smiling.jpg" class="profile-image img-fluid me-3" alt="">
+                                <div class="d-flex flex-column">
+                                    <small id="dropdown-user-name">Usuario</small>
+                                    <a href="#" id="dropdown-user-email" class="break-email">correo@correo.com</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-top mt-3 pt-2 mx-4">
+                            <a class="dropdown-item ms-0 me-0" href="#" id="dropdown-logout-btn">
+                                <i class="bi-box-arrow-left me-2"></i>
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                <div class="position-sticky py-4 px-3 sidebar-sticky">
+                    <ul class="nav flex-column h-100" id="sidebar-links">
+                        <!-- Los enlaces de navegación se generarán dinámicamente por JS -->
+                    </ul>
+                </div>
+            </nav>
+            <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                <div class="title-group mb-3">
+                    <h1 class="h2 mb-0">Monitoreo de Demoras</h1>
+                    <small class="text-muted">Plantilla para monitoreo de demoras en aduanas</small>
+                </div>
+                <div class="row my-4 justify-content-center">
+                    <div class="col-lg-10 col-12">
+                        <div class="custom-block bg-white p-4 text-center">
+                            <h5 class="mb-4">Panel de Monitoreo</h5>
+                            <p class="text-muted">Aquí se mostrará la información de demoras en tiempo real o reportes de demoras. (Plantilla visual, funcionalidad no implementada)</p>
+                            <div class="alert alert-info mt-4">Funcionalidad en desarrollo</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
-    <div id="contenido-monitoreo-demoras">
-        <p>Página de monitoreo de demoras (plantilla).</p>
-    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <p class="copyright-text">Copyright © Mini Finance 2048
+                    - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/sidebar.js"></script>
     <script>
-    if (!localStorage.getItem('jwt')) {
-        window.location.href = '/login.html';
-    } else {
-        document.getElementById('enlaces-sesion').style.display = 'inline';
-        document.getElementById('btn-cerrar-sesion').onclick = function() {
-            localStorage.removeItem('jwt');
-            window.location.href = '/index.html';
-        };
-        // Mostrar contenido solo a admin, funcionario, viajero y transportista
-        const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
-        if (![1,3,4,5].includes(payload.rolId)) {
-            document.getElementById('contenido-monitoreo-demoras').style.display = 'none';
-            document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para administradores, funcionarios, viajeros o transportistas.</p>');
+    // Script para generar sidebar y ocultar el botón de "Monitoreo de Demoras"
+    function parseJwt(token) {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            return null;
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Generar sidebar dinámicamente
+        if (typeof generarEnlacesDashboard === 'function') {
+            generarEnlacesDashboard();
+        }
+        // Ocultar el enlace de Monitoreo de Demoras en el sidebar si existe
+        setTimeout(function() {
+            var enlaceMonitoreo = document.getElementById('enlace-monitoreo-demoras');
+            if (enlaceMonitoreo) enlaceMonitoreo.style.display = 'none';
+        }, 200);
+        // Mostrar datos de usuario en el banner
+        const token = localStorage.getItem('jwt');
+        if (token) {
+            const payload = parseJwt(token);
+            if (payload) {
+                if (payload.nombre) {
+                    var dropdownName = document.getElementById('dropdown-user-name');
+                    if(dropdownName) dropdownName.textContent = payload.nombre;
+                }
+                var email = payload.email || payload.sub || payload.subject;
+                if (email) {
+                    var dropdownEmail = document.getElementById('dropdown-user-email');
+                    if(dropdownEmail) {
+                        dropdownEmail.textContent = email;
+                        dropdownEmail.href = 'mailto:' + email;
+                    }
+                }
+            }
+        }
+        // Botón logout del dropdown
+        var logoutBtn = document.getElementById('dropdown-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('jwt');
+                window.location.href = '/login.html';
+            });
+        }
+    });
     </script>
+    <style>
+.break-email {
+    display: inline-block;
+    max-width: 180px;
+    word-break: break-all;
+    white-space: normal;
+}
+    </style>
 </body>
 </html>

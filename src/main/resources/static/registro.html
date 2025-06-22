@@ -1,45 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tooplate">
+    <title>Registro de Usuario - Aduanas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Registro de Usuario</h1>
-    <form id="registro-form">
-        <label for="rut">RUT:</label>
-        <input type="text" id="rut" name="rut" required maxlength="10"><br>
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" required><br>
-        <label for="contra">Contraseña:</label>
-        <input type="password" id="contra" name="contra" required><br>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br>
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required><br>
-        <label for="rol">Tipo de usuario:</label>
-        <select id="rol" name="rol" required>
-            <option value="4">Viajero</option>
-            <option value="5">Transportista</option>
-        </select><br>
-        <button type="submit">Registrarse</button>
-    </form>
-    <div id="mensaje-registro" style="color:green;"></div>
-    <div id="enlaces-registro">
-        <a href="/index.html">Ir al inicio</a> |
-        <a href="/login.html" id="enlace-login">Ir a Login</a> |
-        <a href="/recuperar_contrasena.html">¿Olvidaste tu contraseña?</a>
-        <span id="enlaces-sesion" style="display:none;">
-            | <a href="/dashboard.html">Ir al Dashboard</a>
-            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
-        </span>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi-box"></i>
+                Aduanas
+            </a>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start" style="margin:auto;float:none;">
+                <div class="title-group mb-3">
+                    <h1 class="h2 mb-0">Registro de Usuario</h1>
+                    <small class="text-muted">Crea tu cuenta para acceder al sistema.</small>
+                </div>
+                <div class="row my-4 justify-content-center">
+                    <div class="col-lg-7 col-12">
+                        <div class="custom-block bg-white p-4">
+                            <form id="registro-form" class="custom-form" autocomplete="off">
+                                <div class="mb-3">
+                                    <label for="rut" class="form-label">RUT</label>
+                                    <input type="text" class="form-control" id="rut" name="rut" required maxlength="10" placeholder="Ej: 12345678-9">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="correo" name="correo" required placeholder="Ingresa tu correo">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contra" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contra" name="contra" required placeholder="Ingresa tu contraseña">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Ingresa tu apellido">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rol" class="form-label">Tipo de usuario</label>
+                                    <select class="form-select" id="rol" name="rol" required>
+                                        <option value="4">Viajero</option>
+                                        <option value="5">Transportista</option>
+                                    </select>
+                                </div>
+                                <div id="mensaje-registro" style="color:green;"></div>
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-success">Registrarse</button>
+                                </div>
+                            </form>
+                            <div class="mt-4 text-center" id="enlaces-registro">
+                                <a href="/index.html" class="btn btn-link">Ir al inicio</a>
+                                <a href="/login.html" class="btn btn-link" id="enlace-login">Ir a Login</a>
+                                <a href="/recuperar_contrasena.html" class="btn btn-link">¿Olvidaste tu contraseña?</a>
+                                <span id="enlaces-sesion" style="display:none;">
+                                    <a href="/dashboard.html" class="btn btn-link">Ir al Dashboard</a>
+                                    <button id="btn-cerrar-sesion" class="btn btn-danger btn-sm ms-2">Cerrar sesión</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
-    <script src="/js/registro.js"></script>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <p class="copyright-text">Copyright © Mini Finance 2048
+                    - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/registro.js"></script>
     <script>
     // Lógica de navegación según sesión
     if (localStorage.getItem('jwt')) {
-        // Si hay sesión, redirigir automáticamente al dashboard
         window.location.href = '/dashboard.html';
     } else {
         document.getElementById('enlace-login').style.display = 'inline';

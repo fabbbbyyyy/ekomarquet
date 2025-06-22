@@ -1,14 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tooplate">
     <title>Inicio - Aduanas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/apexcharts.css" rel="stylesheet">
+    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Bienvenido al sistema de Aduanas</h1>
-    <p>Por favor, inicia sesión para acceder a las funcionalidades protegidas.</p>
-    <div id="enlaces-index"></div>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi-box"></i>
+                Aduanas
+            </a>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start" style="margin:auto;float:none;">
+                <div class="title-group mb-3">
+                    <h1 class="h2 mb-0">Bienvenido al sistema de Aduanas</h1>
+                    <small class="text-muted">Por favor, inicia sesión o regístrate para continuar.</small>
+                </div>
+                <div class="row my-4">
+                    <div class="col-lg-7 col-12">
+                        <div class="custom-block custom-block-balance text-center">
+                            <div id="enlaces-index" class="mb-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <p class="copyright-text">Copyright © Mini Finance 2048
+                    - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
     <script>
     function renderEnlacesIndex() {
         const contenedor = document.getElementById('enlaces-index');
@@ -18,12 +63,12 @@
             // Usuario autenticado
             const dashboard = document.createElement('a');
             dashboard.href = '/dashboard.html';
+            dashboard.className = 'btn btn-primary m-2';
             dashboard.textContent = 'Ir al Dashboard';
             contenedor.appendChild(dashboard);
-            contenedor.appendChild(document.createTextNode(' '));
             const btnCerrar = document.createElement('button');
             btnCerrar.id = 'btn-cerrar-sesion';
-            btnCerrar.style.marginLeft = '10px';
+            btnCerrar.className = 'btn btn-danger m-2';
             btnCerrar.textContent = 'Cerrar sesión';
             btnCerrar.onclick = function() {
                 localStorage.removeItem('jwt');
@@ -33,19 +78,16 @@
         } else {
             // Usuario no autenticado
             const enlaces = [
-                { href: '/login.html', texto: 'Ir a Login' },
-                { href: '/registro.html', texto: 'Registrarse' },
-                { href: '/recuperar_contrasena.html', texto: '¿Olvidaste tu contraseña?' }
+                { href: '/login.html', texto: 'Login', clase: 'btn btn-primary m-2' },
+                { href: '/registro.html', texto: 'Registrarse', clase: 'btn btn-success m-2' },
+                { href: '/recuperar_contrasena.html', texto: 'Olvidé mi contraseña', clase: 'btn btn-warning m-2' }
             ];
-            enlaces.forEach((enlace, idx) => {
+            enlaces.forEach((enlace) => {
                 const a = document.createElement('a');
                 a.href = enlace.href;
-                a.id = 'enlace-' + enlace.texto.toLowerCase().replace(/ /g, '-');
+                a.className = enlace.clase;
                 a.textContent = enlace.texto;
                 contenedor.appendChild(a);
-                if (idx < enlaces.length - 1) {
-                    contenedor.appendChild(document.createTextNode(' | '));
-                }
             });
         }
     }

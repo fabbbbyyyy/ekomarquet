@@ -1,34 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tooplate">
     <title>Login - Aduanas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Iniciar Sesión</h1>
-    <form id="login-form">
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" required><br>
-        <label for="contra">Contraseña:</label>
-        <input type="password" id="contra" name="contra" required><br>
-        <button type="submit">Ingresar</button>
-    </form>
-    <div id="mensaje-error" style="color:red;"></div>
-    <div id="enlaces-login">
-        <a href="/index.html">Ir al inicio</a> |
-        <a href="/registro.html" id="enlace-registro">Registrarse</a> |
-        <a href="/recuperar_contrasena.html">¿Olvidaste tu contraseña?</a>
-        <span id="enlaces-sesion" style="display:none;">
-            | <a href="/dashboard.html">Ir al Dashboard</a>
-            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
-        </span>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi-box"></i>
+                Aduanas
+            </a>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start" style="margin:auto;float:none;">
+                <div class="title-group mb-3">
+                    <h1 class="h2 mb-0">Iniciar Sesión</h1>
+                    <small class="text-muted">Accede a tu cuenta para continuar.</small>
+                </div>
+                <div class="row my-4 justify-content-center">
+                    <div class="col-lg-7 col-12">
+                        <div class="custom-block bg-white p-4">
+                            <form id="login-form" class="custom-form" autocomplete="off">
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="correo" name="correo" required placeholder="Ingresa tu correo">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contra" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contra" name="contra" required placeholder="Ingresa tu contraseña">
+                                </div>
+                                <div id="mensaje-error" style="color:red;"></div>
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                                </div>
+                            </form>
+                            <div class="mt-4 text-center" id="enlaces-login">
+                                <a href="/index.html" class="btn btn-link">Ir al inicio</a>
+                                <a href="/registro.html" class="btn btn-link" id="enlace-registro">Registrarse</a>
+                                <a href="/recuperar_contrasena.html" class="btn btn-link">¿Olvidaste tu contraseña?</a>
+                                <span id="enlaces-sesion" style="display:none;">
+                                    <a href="/dashboard.html" class="btn btn-link">Ir al Dashboard</a>
+                                    <button id="btn-cerrar-sesion" class="btn btn-danger btn-sm ms-2">Cerrar sesión</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
-    <script src="/js/login.js"></script>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <p class="copyright-text">Copyright © Mini Finance 2048
+                    - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/login.js"></script>
     <script>
     // Lógica de navegación según sesión
     if (localStorage.getItem('jwt')) {
-        // Si hay sesión, redirigir automáticamente al dashboard
         window.location.href = '/dashboard.html';
     } else {
         document.getElementById('enlace-registro').style.display = 'inline';
