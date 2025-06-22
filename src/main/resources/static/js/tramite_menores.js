@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/login.html';
         return;
     }
-    document.getElementById('enlaces-sesion').style.display = 'inline';
-    document.getElementById('btn-cerrar-sesion').onclick = function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/index.html';
-    };
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
     const userId = payload.userId ? Number(payload.userId) : null;
     if (![1,4,5].includes(payload.rolId) || !userId) {
@@ -27,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const tramite = {
             tipoTramite: 1,
             descripcion: `Nombre: ${nombre}, Edad: ${edad}`,
-            usuario: { id: userId }
+            usuario: { id: userId },
+            fechaCreacion: new Date().toISOString(),
+            estado: 'NO_REVISADO'
         };
         console.log('Trámite a enviar:', tramite);
         try {
@@ -41,12 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             if (response.ok) {
                 mensaje.style.color = 'green';
-                mensaje.textContent = 'Trámite de menor registrado correctamente.';
+                mensaje.textContent = 'Tramite menor registrado correctamente';
                 form.reset();
             } else {
                 const error = await response.text();
                 mensaje.style.color = 'red';
                 mensaje.textContent = 'Error: ' + error;
+                console.error('Error al registrar trámite:', error);
             }
         } catch (error) {
             mensaje.style.color = 'red';

@@ -3,15 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/login.html';
         return;
     }
-    document.getElementById('enlaces-sesion').style.display = 'inline';
-    document.getElementById('btn-cerrar-sesion').onclick = function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/index.html';
-    };
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
     const userId = payload.userId ? Number(payload.userId) : null;
     if (![1,4,5].includes(payload.rolId) || !userId) {
-        document.getElementById('contenido-tramite-vehiculo').style.display = 'none';
+        document.getElementById('usuario-autenticado').style.display = 'none';
         document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para administradores, viajeros o transportistas, y usuario debe estar autenticado correctamente.</p>');
         return;
     }
@@ -20,13 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
         mensaje.textContent = '';
-        const patente = document.getElementById('patente-vehiculo').value;
-        const marca = document.getElementById('marca-vehiculo').value;
-        const modelo = document.getElementById('modelo-vehiculo').value;
+        const patente = document.getElementById('patente-vehiculo').value.trim();
+        const marca = document.getElementById('marca-vehiculo').value.trim();
+        const modelo = document.getElementById('modelo-vehiculo').value.trim();
+        if (!patente || !marca || !modelo) {
+            mensaje.style.color = 'red';
+            mensaje.textContent = 'Debe ingresar patente, marca y modelo del vehículo.';
+            return;
+        }
         const tramite = {
             tipoTramite: 2,
             descripcion: `Patente: ${patente}, Marca: ${marca}, Modelo: ${modelo}`,
-            usuario: { id: userId }
+            usuario: { id: userId },
+            fechaCreacion: new Date().toISOString(),
+            estado: 'NO_REVISADO'
         };
         try {
             const response = await fetch('/api/v1/tramites', {
@@ -45,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const error = await response.text();
                 mensaje.style.color = 'red';
                 mensaje.textContent = 'Error: ' + error;
+                console.error('Error al registrar trámite:', error);
             }
         } catch (error) {
             mensaje.style.color = 'red';
@@ -52,4 +55,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-

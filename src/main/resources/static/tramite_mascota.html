@@ -1,31 +1,251 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trámite Mascota - Aduanas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Trámite Mascota</h1>
-    <div id="enlaces-tramite-mascota">
-        <a href="/index.html">Ir al inicio</a> |
-        <a href="/dashboard.html">Ir al Dashboard</a>
-        <span id="enlaces-sesion" style="display:none;">
-            <button id="btn-cerrar-sesion" style="margin-left:10px;">Cerrar sesión</button>
-        </span>
-    </div>
-    <div id="contenido-tramite-mascota">
-        <form id="form-tramite-mascota">
-            <label for="nombre-mascota">Nombre de la mascota:</label>
-            <input type="text" id="nombre-mascota" name="nombre-mascota" required><br>
-            <label for="tipo-mascota">Tipo de mascota:</label>
-            <input type="text" id="tipo-mascota" name="tipo-mascota" required><br>
-            <label for="documento-mascota">Documento:</label>
-            <input type="text" id="documento-mascota" name="documento-mascota" required><br>
-            <button type="submit">Registrar</button>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi-box"></i>
+                Aduanas
+            </a>
+        </div>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0" action="#" method="get" role="form">
+            <input class="form-control" name="search" type="text" placeholder="Buscar" aria-label="Buscar">
         </form>
-        <div id="mensaje-tramite-mascota"></div>
+        <div class="navbar-nav me-lg-2">
+            <div class="nav-item text-nowrap d-flex align-items-center">
+                <!-- Notificaciones y menú de usuario igual que en gestion_roles.html -->
+                <div class="dropdown ps-3">
+                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
+                        <i class="bi-bell"></i>
+                        <span class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow" aria-labelledby="navbarLightDropdownMenuLink">
+                        <small>Notifications</small>
+                        <li class="notifications-block border-bottom pb-2 mb-2">
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="notifications-icon-wrap bg-success">
+                                    <i class="notifications-icon bi-check-circle-fill"></i>
+                                </div>
+                                <div>
+                                    <span>Your account has been created successfuly.</span>
+                                    <p>12 days ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notifications-block border-bottom pb-2 mb-2">
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="notifications-icon-wrap bg-info">
+                                    <i class="notifications-icon bi-folder"></i>
+                                </div>
+                                <div>
+                                    <span>Please check. We have sent a Daily report.</span>
+                                    <p>10 days ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notifications-block">
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="notifications-icon-wrap bg-danger">
+                                    <i class="notifications-icon bi-question-circle"></i>
+                                </div>
+                                <div>
+                                    <span>Account verification failed.</span>
+                                    <p>1 hour ago</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdown ps-1">
+                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi-three-dots-vertical"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-social bg-white shadow">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/search.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Google</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/spotify.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Spotify</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/telegram.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Telegram</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/snapchat.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Snapchat</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/tiktok.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Tiktok</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4">
+                                    <a class="dropdown-item text-center" href="#">
+                                        <img src="images/social/youtube.png" class="profile-image img-fluid" alt="">
+                                        <span class="d-block">Youtube</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="images/medium-shot-happy-man-smiling.jpg" class="profile-image img-fluid" alt="">
+                    </a>
+                    <ul class="dropdown-menu bg-white shadow">
+                        <li>
+                            <div class="dropdown-menu-profile-thumb d-flex">
+                                <img src="images/medium-shot-happy-man-smiling.jpg" class="profile-image img-fluid me-3" alt="">
+                                <div class="d-flex flex-column">
+                                    <small id="dropdown-user-name">Usuario</small>
+                                    <a href="#" id="dropdown-user-email" class="break-email">correo@correo.com</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-top mt-3 pt-2 mx-4">
+                            <a class="dropdown-item ms-0 me-0" href="#" id="dropdown-logout-btn">
+                                <i class="bi-box-arrow-left me-2"></i>
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                <div class="position-sticky py-4 px-3 sidebar-sticky">
+                    <ul class="nav flex-column h-100" id="sidebar-links">
+                        <!-- Los enlaces de navegación se generarán dinámicamente por JS -->
+                    </ul>
+                </div>
+            </nav>
+            <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                <div class="title-group mb-3">
+                    <h1 class="h2 mb-0">Trámite de Mascota</h1>
+                </div>
+                <div class="row my-4">
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <div class="custom-block bg-white">
+                            <div id="usuario-autenticado" class="mb-3"></div>
+                            <h5 class="mb-4">Registrar Trámite de Mascota</h5>
+                            <form id="form-tramite-mascota">
+                                <div class="mb-3">
+                                    <label for="nombre-mascota" class="form-label">Nombre de la mascota:</label>
+                                    <input type="text" class="form-control" id="nombre-mascota" name="nombre-mascota" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipo-mascota" class="form-label">Tipo de mascota:</label>
+                                    <input type="text" class="form-control" id="tipo-mascota" name="tipo-mascota" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                            </form>
+                            <div id="mensaje-tramite-mascota" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="site-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-12">
+                                <p class="copyright-text">Copyright © Aduanas 2048
+                                - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
     </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tramite_mascota.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script>
+    // Mostrar nombre y correo en el banner superior desde el token
+    function parseJwt(token) {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            return null;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('jwt');
+        if (token) {
+            const payload = parseJwt(token);
+            if (payload) {
+                if (payload.nombre) {
+                    var dropdownName = document.getElementById('dropdown-user-name');
+                    if(dropdownName) dropdownName.textContent = payload.nombre;
+                }
+                var email = payload.email || payload.sub || payload.subject;
+                if (email) {
+                    var dropdownEmail = document.getElementById('dropdown-user-email');
+                    if(dropdownEmail) {
+                        dropdownEmail.textContent = email;
+                        dropdownEmail.href = 'mailto:' + email;
+                    }
+                }
+            }
+        }
+        // Logout desde el sidebar
+        var sidebarLogout = document.getElementById('dropdown-logout-btn');
+        if (sidebarLogout) {
+            sidebarLogout.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('jwt');
+                window.location.href = '/login.html';
+            });
+        }
+        // Sidebar dinámico igual que dashboard
+        if (typeof generarEnlacesDashboard === 'function') {
+            generarEnlacesDashboard('tramite_mascota');
+        } else if (typeof generarEnlacesSidebar === 'function') {
+            generarEnlacesSidebar('tramite_mascota');
+        }
+    });
+    </script>
+    <style>
+    .break-email {
+        display: inline-block;
+        max-width: 180px;
+        word-break: break-all;
+        white-space: normal;
+    }
+    </style>
 </body>
 </html>
