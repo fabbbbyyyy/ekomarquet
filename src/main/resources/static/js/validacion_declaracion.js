@@ -3,11 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/login.html';
         return;
     }
-    document.getElementById('enlaces-sesion').style.display = 'inline';
-    document.getElementById('btn-cerrar-sesion').onclick = function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/index.html';
-    };
+    var enlacesSesion = document.getElementById('enlaces-sesion');
+    if (enlacesSesion) {
+        enlacesSesion.style.display = 'inline';
+    }
+    var btnCerrarSesion = document.getElementById('btn-cerrar-sesion');
+    if (btnCerrarSesion) {
+        btnCerrarSesion.onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+    }
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
     if (payload.rolId != 2 && payload.rolId != 1) {
         document.getElementById('contenido-validacion-declaracion').style.display = 'none';
@@ -29,17 +35,31 @@ let idsValidos = [];
 
 function renderTabla(tramites) {
     const div = document.getElementById('tramites-declaracion');
+    let html = '';
     if (!tramites.length) {
-        div.innerHTML = '<p>No hay declaraciones SAG registradas.</p>';
+        html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody><tr><td colspan="6" class="text-center">No hay declaraciones SAG registradas.</td></tr></tbody></table>`;
         idsValidos = [];
+        div.innerHTML = html;
         return;
     }
     idsValidos = tramites.map(t => t.id);
-    let html = '<table><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>';
+    html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
     tramites.forEach(t => {
-        html += `<tr><td>${t.id}</td><td>${t.descripcion}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
+        // Suponiendo que la descripción es "Producto: X, Cantidad: Y, País de origen: Z"
+        let producto = '', cantidad = '', pais = '';
+        if (t.descripcion) {
+            const match = t.descripcion.match(/Producto:\s*([^,]+),\s*Cantidad:\s*([^,]+),\s*País de origen:\s*(.+)/i);
+            if (match) {
+                producto = match[1].trim();
+                cantidad = match[2].trim();
+                pais = match[3].trim();
+            } else {
+                producto = t.descripcion;
+            }
+        }
+        html += `<tr><td>${t.id}</td><td>${producto}</td><td>${cantidad}</td><td>${pais}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
     });
-    html += '</table>';
+    html += '</tbody></table>';
     div.innerHTML = html;
 }
 

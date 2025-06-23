@@ -3,14 +3,22 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/login.html';
         return;
     }
-    document.getElementById('enlaces-sesion').style.display = 'inline';
-    document.getElementById('btn-cerrar-sesion').onclick = function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/index.html';
-    };
+    // Control de sesión universal
+    var enlacesSesion = document.getElementById('enlaces-sesion');
+    if (enlacesSesion) {
+        enlacesSesion.style.display = 'inline';
+    }
+    var btnCerrarSesion = document.getElementById('btn-cerrar-sesion');
+    if (btnCerrarSesion) {
+        btnCerrarSesion.onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+    }
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
     if (payload.rolId != 3 && payload.rolId != 1) {
-        document.getElementById('form-validacion-menores').style.display = 'none';
+        if(document.getElementById('panel-accion-menor'))
+            document.getElementById('panel-accion-menor').style.display = 'none';
         document.body.insertAdjacentHTML('beforeend', '<p style="color:red">Acceso solo para funcionarios o administradores.</p>');
         return;
     }
@@ -19,17 +27,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderTablaMenores(tramites) {
         const div = document.getElementById('tramites-menores');
+        let html = '';
         if (!tramites.length) {
-            div.innerHTML = '<p>No hay trámites de menores registrados.</p>';
+            html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody><tr><td colspan="6" class="text-center">No hay trámites de menores registrados.</td></tr></tbody></table>`;
             idsMenoresValidos = [];
+            div.innerHTML = html;
             return;
         }
         idsMenoresValidos = tramites.map(t => t.id);
-        let html = '<table><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>';
+        html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
         tramites.forEach(t => {
-            html += `<tr><td>${t.id}</td><td>${t.descripcion}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
+            // Suponiendo que la descripción es "Nombre: X, Edad: Y"
+            let nombre = '', edad = '';
+            if (t.descripcion) {
+                const match = t.descripcion.match(/Nombre:\s*([^,]+),\s*Edad:\s*(.+)/i);
+                if (match) {
+                    nombre = match[1].trim();
+                    edad = match[2].trim();
+                } else {
+                    nombre = t.descripcion;
+                }
+            }
+            html += `<tr><td>${t.id}</td><td>${nombre}</td><td>${edad}</td><td>${t.usuario?.nombre || t.usuario?.id || ''}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
         });
-        html += '</table>';
+        html += '</tbody></table>';
         div.innerHTML = html;
     }
 
@@ -87,27 +108,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // UI para aceptar/rechazar trámites de menores
-    window.addEventListener('DOMContentLoaded', function() {
-        cargarTramitesMenores();
-        // Agregar controles para cambiar estado
-        const div = document.getElementById('tramites-menores');
-        const controles = document.createElement('div');
-        controles.innerHTML = `
-            <div style="margin-top:15px;">
-                <label for="accion-id-menor">ID de trámite a validar:</label>
-                <input type="number" id="accion-id-menor" min="1" style="width:80px;">
-                <button id="btn-aceptar-menor">Aceptar</button>
-                <button id="btn-rechazar-menor">Rechazar</button>
-                <span id="accion-resultado-menor" style="margin-left:10px;"></span>
-            </div>
-        `;
-        div.parentNode.insertBefore(controles, div.nextSibling);
-        document.getElementById('btn-aceptar-menor').onclick = function() {
-            actualizarEstadoMenor('ACEPTADO');
-        };
-        document.getElementById('btn-rechazar-menor').onclick = function() {
-            actualizarEstadoMenor('RECHAZADO');
-        };
-    });
+    // Inicialización de tabla y controles
+    cargarTramitesMenores();
+    document.getElementById('btn-aceptar-menor').onclick = function() {
+        actualizarEstadoMenor('ACEPTADO');
+    };
+    document.getElementById('btn-rechazar-menor').onclick = function() {
+        actualizarEstadoMenor('RECHAZADO');
+    };
 });

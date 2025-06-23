@@ -3,11 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/login.html';
         return;
     }
-    document.getElementById('enlaces-sesion').style.display = 'inline';
-    document.getElementById('btn-cerrar-sesion').onclick = function() {
-        localStorage.removeItem('jwt');
-        window.location.href = '/index.html';
-    };
+    var enlacesSesion = document.getElementById('enlaces-sesion');
+    if (enlacesSesion) {
+        enlacesSesion.style.display = 'inline';
+    }
+    var btnCerrarSesion = document.getElementById('btn-cerrar-sesion');
+    if (btnCerrarSesion) {
+        btnCerrarSesion.onclick = function() {
+            localStorage.removeItem('jwt');
+            window.location.href = '/index.html';
+        };
+    }
     const payload = JSON.parse(atob(localStorage.getItem('jwt').split('.')[1]));
     if (![1,2,4,5].includes(payload.rolId)) {
         document.getElementById('contenido-validacion-registros').style.display = 'none';
@@ -18,32 +24,71 @@ document.addEventListener('DOMContentLoaded', function() {
     let idsVehiculoValidos = [];
 
     function renderTablaVehiculos(tramites) {
-        const div = document.getElementById('tramites-vehiculos');
-        if (!tramites.length) {
-            div.innerHTML = '<p>No hay trámites de vehículos registrados.</p>';
+        const tabla = document.getElementById('tabla-tramites-vehiculos');
+        let html = '';
+        if (!tramites || !tramites.length) {
+            html = '<thead><tr><th>ID</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead>';
+            html += '<tbody><tr><td colspan="7" class="text-center">No hay trámites de vehículos registrados.</td></tr></tbody>';
             idsVehiculoValidos = [];
+            tabla.innerHTML = html;
             return;
         }
         idsVehiculoValidos = tramites.map(t => t.id);
-        let html = '<table><tr><th>ID</th><th>Descripción</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>';
+        html = `<thead>
+            <tr>
+                <th>ID</th>
+                <th>Patente</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>`;
         tramites.forEach(t => {
-            html += `<tr><td>${t.id}</td><td>${t.descripcion}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
+            // Suponiendo que la descripción es "Patente: X, Marca: Y, Modelo: Z"
+            let patente = '', marca = '', modelo = '';
+            if (t.descripcion) {
+                const match = t.descripcion.match(/Patente:\s*([^,]+),\s*Marca:\s*([^,]+),\s*Modelo:\s*(.+)/i);
+                if (match) {
+                    patente = match[1].trim();
+                    marca = match[2].trim();
+                    modelo = match[3].trim();
+                } else {
+                    patente = t.descripcion;
+                }
+            }
+            html += `<tr>
+                <td>${t.id}</td>
+                <td>${patente}</td>
+                <td>${marca}</td>
+                <td>${modelo}</td>
+                <td>${t.usuario?.nombre || t.usuario?.id || ''}</td>
+                <td>${t.fechaCreacion ? new Date(t.fechaCreacion).toLocaleString() : ''}</td>
+                <td>${t.estado || 'PENDIENTE'}</td>
+            </tr>`;
         });
-        html += '</table>';
-        div.innerHTML = html;
+        html += '</tbody>';
+        tabla.innerHTML = html;
     }
 
     function cargarTramitesVehiculo() {
         fetch('/api/v1/tramites/tipo/2', {
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwt') }
         })
-        .then(r => r.json())
-        .then(tramites => {
-            tramitesVehiculoCache = tramites;
-            renderTablaVehiculos(tramitesVehiculoCache);
+        .then(async r => {
+            if (!r.ok) {
+                document.getElementById('tabla-tramites-vehiculos').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error al cargar los trámites.</td></tr>';
+                return;
+            }
+            let tramites = await r.json();
+            // Si la respuesta es null o vacía, forzar array vacío
+            if (!tramites) tramites = [];
+            renderTablaVehiculos(tramites);
         })
         .catch(() => {
-            document.getElementById('tramites-vehiculos').innerHTML = '<p style="color:red">Error al cargar los trámites.</p>';
+            document.getElementById('tabla-tramites-vehiculos').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error al cargar los trámites.</td></tr>';
         });
     }
 
@@ -91,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('DOMContentLoaded', function() {
         cargarTramitesVehiculo();
         // Agregar controles para cambiar estado
-        const div = document.getElementById('tramites-vehiculos');
+        const tabla = document.getElementById('tabla-tramites-vehiculos');
         const controles = document.createElement('div');
         controles.innerHTML = `
             <div style="margin-top:15px;">
@@ -102,7 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span id="accion-resultado-vehiculo" style="margin-left:10px;"></span>
             </div>
         `;
-        div.parentNode.insertBefore(controles, div.nextSibling);
+        // Insertar controles después de la tabla, dentro de custom-block
+        const customBlock = tabla.closest('.custom-block');
+        if (customBlock) {
+            customBlock.appendChild(controles);
+        }
         document.getElementById('btn-aceptar-vehiculo').onclick = function() {
             actualizarEstadoVehiculo('ACEPTADO');
         };

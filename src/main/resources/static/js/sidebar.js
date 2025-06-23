@@ -106,4 +106,22 @@ document.addEventListener('DOMContentLoaded', function() {
             if (enlaceMenores) enlaceMenores.style.display = 'none';
         }, 200);
     }
+    if (window.location.pathname.endsWith('/validacion_mascotas.html')) {
+        setTimeout(function() {
+            var enlaceValidacionMascotas = document.getElementById('enlace-validacion-mascotas');
+            if (enlaceValidacionMascotas) enlaceValidacionMascotas.style.display = 'none';
+        }, 200);
+    }
+    if (window.location.pathname.endsWith('/validacion_menores.html')) {
+        setTimeout(function() {
+            var enlaceValidacionMenores = document.getElementById('enlace-validacion-menores');
+            if (enlaceValidacionMenores) enlaceValidacionMenores.style.display = 'none';
+        }, 200);
+    }
+    if (window.location.pathname.endsWith('/validacion_vehiculos.html')) {
+        setTimeout(function() {
+            var enlaceValidacionVehiculos = document.getElementById('enlace-validacion-vehiculos');
+            if (enlaceValidacionVehiculos) enlaceValidacionVehiculos.style.display = 'none';
+        }, 200);
+    }
 });
