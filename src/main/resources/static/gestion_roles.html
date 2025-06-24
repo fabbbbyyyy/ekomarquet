@@ -208,6 +208,15 @@
             }
         }, 300);
     });
+    // Asegurar que el enlace de gestión de roles se elimina igual que en usuarios.html
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var enlaceGestionRoles = document.getElementById('enlace-gestion-roles');
+            if (enlaceGestionRoles && enlaceGestionRoles.parentNode) {
+                enlaceGestionRoles.parentNode.remove();
+            }
+        }, 100);
+    });
     </script>
     <style>
     .break-email {
