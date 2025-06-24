@@ -144,4 +144,15 @@ function agregarEventosCambioRol(roles) {
 document.addEventListener('DOMContentLoaded', () => {
     mostrarUsuarioAutenticado();
     cargarUsuarios();
+    // Asegura que el botón de cerrar sesión funcione
+    setTimeout(function() {
+        var logoutBtn = document.getElementById('dropdown-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('jwt');
+                window.location.href = '/login.html';
+            });
+        }
+    }, 200);
 });

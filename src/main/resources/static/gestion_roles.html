@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0" action="#" method="get" role="form">
-            <input class="form-control" name="search" type="text" placeholder="Buscar" aria-label="Buscar">
+            <input class="form-control" name="search" type="text" placeholder="Search" aria-label="Search">
         </form>
         <div class="navbar-nav me-lg-2">
             <div class="nav-item text-nowrap d-flex align-items-center">
@@ -31,30 +31,19 @@
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
                         <i class="bi-bell"></i>
                         <span class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
+                            <span class="visually-hidden">Nuevas alertas</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow" aria-labelledby="navbarLightDropdownMenuLink">
-                        <small>Notifications</small>
+                        <small>Notificaciones</small>
                         <li class="notifications-block border-bottom pb-2 mb-2">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex  align-items-center" href="#">
                                 <div class="notifications-icon-wrap bg-success">
                                     <i class="notifications-icon bi-check-circle-fill"></i>
                                 </div>
                                 <div>
-                                    <span>Your account has been created successfuly.</span>
-                                    <p>12 days ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notifications-block border-bottom pb-2 mb-2">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="notifications-icon-wrap bg-info">
-                                    <i class="notifications-icon bi-folder"></i>
-                                </div>
-                                <div>
-                                    <span>Please check. We have sent a Daily report.</span>
-                                    <p>10 days ago</p>
+                                    <span>Tu cuenta ha sido creada exitosamente.</span>
+                                    <p>Hace 12 días</p>
                                 </div>
                             </a>
                         </li>
@@ -64,8 +53,8 @@
                                     <i class="notifications-icon bi-question-circle"></i>
                                 </div>
                                 <div>
-                                    <span>Account verification failed.</span>
-                                    <p>1 hour ago</p>
+                                    <span>La verificación de la cuenta falló.</span>
+                                    <p>Hace 1 hora</p>
                                 </div>
                             </a>
                         </li>
@@ -82,36 +71,6 @@
                                     <a class="dropdown-item text-center" href="#">
                                         <img src="images/social/search.png" class="profile-image img-fluid" alt="">
                                         <span class="d-block">Google</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/spotify.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Spotify</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/telegram.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Telegram</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/snapchat.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Snapchat</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/tiktok.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Tiktok</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/youtube.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Youtube</span>
                                     </a>
                                 </div>
                             </div>
@@ -186,6 +145,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/gestion_roles.js"></script>
     <script src="js/sidebar.js"></script>
+    <script src="js/dashboard.js"></script>
     <script>
     // Mostrar nombre y correo en el banner superior desde el token
     function parseJwt(token) {
@@ -236,6 +196,17 @@
                 enlaceGestionRoles.parentNode.remove();
             }
         }, 100);
+        // Botón logout del dropdown (menú usuario arriba a la derecha)
+        setTimeout(function() {
+            var logoutBtn = document.getElementById('dropdown-logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('jwt');
+                    window.location.href = '/login.html';
+                });
+            }
+        }, 300);
     });
     </script>
     <style>
