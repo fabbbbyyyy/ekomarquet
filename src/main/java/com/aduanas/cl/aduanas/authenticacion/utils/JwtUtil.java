@@ -28,6 +28,8 @@ public class JwtUtil {
                 .claim("rolId", usuario.getRol().getId())
                 .claim("userId", usuario.getId())
                 .claim("nombre", usuario.getNombre()) // Agrega el nombre al JWT
+                .claim("apellido", usuario.getApellido()) // Agrega el apellido al JWT
+                .claim("rut", usuario.getRut()) // Agrega el rut al JWT
                 .claim("email", usuario.getCorreo()) // Agrega el correo explícitamente como claim
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
