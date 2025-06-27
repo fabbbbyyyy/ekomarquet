@@ -1,23 +1,18 @@
 INSERT INTO roles (nombre, descripcion, permisos) VALUES
-('Administrador', 'Rol con todos los permisos del sistema', '{"dashboard": true }'),
-('Operador', 'Rol operador', '{"dashboard": true }'),
-('AA', 'Rol Alumno ayudante', '{"dashboard": true }')
+('Administrador', 'Rol con todos los permisos del sistema', '{"dashboard": true, "usuarios": {"crear": true, "leer": true, "actualizar": true, "eliminar": true}, "productos": {"crear": true, "leer": true, "actualizar": true, "eliminar": true}, "pedidos": {"crear": true, "leer": true, "actualizar": true, "eliminar": true}}'),
+('Inspector', 'Rol para personal de ventas', '{"dashboard": true, "productos": {"crear": false, "leer": true, "actualizar": false, "eliminar": false}, "pedidos": {"crear": true, "leer": true, "actualizar": true, "eliminar": false}}'),
+('Funcionario', 'Rol para Funcionarios del ecommerce', '{"dashboard": false, "productos": {"crear": false, "leer": true, "actualizar": false, "eliminar": false}, "pedidos": {"crear": true, "leer": true, "actualizar": false, "eliminar": false}}'),
+('Viajero', 'Rol para personal de reparto', '{"dashboard": false, "pedidos": {"crear": false, "leer": true, "actualizar": true, "eliminar": false}}'),
+('Transportista', 'Rol para personal de bodega e Transportista', '{"dashboard": false, "productos": {"crear": true, "leer": true, "actualizar": true, "eliminar": false}}');
 
 INSERT INTO usuarios (rut, correo, contra, nombre, apellido, rol_id) VALUES
-('12345678-9', 'admin@servicios.cl', 'Admin123', 'Juan', 'Pérez', 1),
-('98765432-1', 'operador1@servicios.cl', 'Operador123', 'María', 'González', 2),
-('45678901-2', 'aa1@servicios.cl', 'AA456', 'Carlos', 'López', 3)
-
-INSERT INTO docentes (rut, nombre, apellido, dv) VALUES
-(12345678, 'Juan', 'Pérez', '5'),
-(23456789, 'María', 'González', 'k'),
-(34567890, 'Pedro', 'Martínez', '1'),
-(45678901, 'Ana', 'López', '2'),
-(56789012, 'Carlos', 'Rodríguez', '3');
-
-INSERT INTO carros (nombre_carro, sala, cantidad_equipos) VALUES
-('Carro 305', 'Sala 305', 42),
-('Carro 306', 'Sala 306', 40),
-('Carro 307', 'Sala 307', 40),
-('Carro 308', 'Sala 308', 30),
-('Carro 309', 'Sala 309', 40)
+('12345678-9', 'admin@aduanas.cl', 'Admin123', 'Juan', 'Pérez', 1),
+('98765432-1', 'inspector1@aduanas.cl', 'Inspector123', 'María', 'González', 2),
+('45678901-2', 'inspector2@aduanas.cl', 'Inspector456', 'Carlos', 'López', 2),
+('78901234-5', 'funcionario1@aduanas.cl', 'Funcionario123', 'Ana', 'Martínez', 3),
+('23456789-0', 'funcionario2@aduanas.cl', 'Funcionario456', 'Pedro', 'Sánchez', 3),
+('56789012-3', 'funcionario3@aduanas.cl', 'Funcionario789', 'Laura', 'Rodríguez', 3),
+('89012345-6', 'viajero1@aduanas.cl', 'Viajero123', 'Diego', 'Fernández', 4),
+('34567890-1', 'viajero2@aduanas.cl', 'Viajero456', 'Sofía', 'Díaz', 4),
+('67890123-4', 'transportista1@aduanas.cl', 'Transportista123', 'Pablo', 'Ruiz', 5),
+('90123456-7', 'transportista2@aduanas.cl', 'Transportista456', 'Elena', 'Torres', 5);

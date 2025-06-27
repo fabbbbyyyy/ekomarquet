@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Validación Mascotas - Aduanas</title>
+    <title>Validación Declaración - Aduanas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
@@ -77,31 +77,29 @@
             <div class="position-sticky py-4 px-3 sidebar-sticky">
                 <ul class="nav flex-column h-100" id="sidebar-links">
                     <!-- Los enlaces de navegación se generarán dinámicamente por JS -->
-                    <li class="nav-item" id="enlace-validacion-mascota" style="display:none;"></li>
+                    <li class="nav-item" id="enlace-validacion-declaracion" style="display:none;"></li>
                 </ul>
             </div>
         </nav>
         <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
-            <div id="contenido-validacion-mascotas">
-                <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Validación de Mascotas</h1>
-                    <small class="text-muted">Panel de validación de trámites de mascotas</small>
-                </div>
-                <div class="row my-4">
-                    <div class="col-lg-12 col-12">
-                        <div class="custom-block bg-white">
-                            <div id="usuario-autenticado" class="mb-3"></div>
-                            <h5 class="mb-4">Trámites de Mascotas</h5>
-                            <div class="table-responsive">
-                                <div id="tramites-mascotas"></div>
-                            </div>
-                            <div id="panel-accion-mascota" class="mt-4">
-                                <label for="accion-id">ID de mascota:</label>
-                                <input type="text" id="accion-id" name="accion-id"><br><br>
-                                <button id="btn-aceptar" type="button">Aceptar</button>
-                                <button id="btn-rechazar" type="button" style="margin-left:10px;">Rechazar</button>
-                                <div id="accion-resultado" style="margin-top:10px;color:green;"></div>
-                            </div>
+            <div class="title-group mb-3">
+                <h1 class="h2 mb-0">Validación de Declaración</h1>
+                <small class="text-muted">Panel de validación de declaraciones SAG</small>
+            </div>
+            <div class="row my-4">
+                <div class="col-lg-12 col-12">
+                    <div class="custom-block bg-white">
+                        <div id="usuario-autenticado" class="mb-3"></div>
+                        <h5 class="mb-4">Declaraciones SAG</h5>
+                        <div class="table-responsive">
+                            <div id="tramites-declaracion"></div>
+                        </div>
+                        <div id="panel-accion-declaracion" class="mt-4">
+                            <label for="accion-id">ID de declaración:</label>
+                            <input type="text" id="accion-id" name="accion-id"><br><br>
+                            <button id="btn-aceptar" type="button">Aceptar</button>
+                            <button id="btn-rechazar" type="button" style="margin-left:10px;">Rechazar</button>
+                            <div id="accion-resultado" style="margin-top:10px;color:green;"></div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +109,7 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/validacion_mascotas.js"></script>
+<script src="js/validacion_declaracion.js"></script>
 <script src="js/sidebar.js"></script>
 <script>
     function parseJwt(token) {
@@ -148,8 +146,8 @@
                 window.location.href = '/login.html';
             });
         }
-        var enlaceValidacionMascota = document.getElementById('enlace-validacion-mascota');
-        if (enlaceValidacionMascota) enlaceValidacionMascota.style.display = 'none';
+        var enlaceValidacionDeclaracion = document.getElementById('enlace-validacion-declaracion');
+        if (enlaceValidacionDeclaracion) enlaceValidacionDeclaracion.style.display = 'none';
     });
 </script>
 <style>

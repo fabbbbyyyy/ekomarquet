@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trámite Mascota - Aduanas</title>
+    <title>Declaración SAG - Aduanas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
@@ -155,25 +155,29 @@
             </nav>
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                 <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Trámite de Mascota</h1>
+                    <h1 class="h2 mb-0">Declaración SAG</h1>
                 </div>
                 <div class="row my-4">
                     <div class="col-lg-8 col-12 mx-auto">
                         <div class="custom-block bg-white">
                             <div id="usuario-autenticado" class="mb-3"></div>
-                            <h5 class="mb-4">Registrar Trámite de Mascota</h5>
-                            <form id="form-tramite-mascota">
+                            <h5 class="mb-4">Registrar Declaración SAG</h5>
+                            <form id="form-declaracion-sag">
                                 <div class="mb-3">
-                                    <label for="nombre-mascota" class="form-label">Nombre de la mascota:</label>
-                                    <input type="text" class="form-control" id="nombre-mascota" name="nombre-mascota" required>
+                                    <label for="producto-sag" class="form-label">Producto a declarar:</label>
+                                    <input type="text" class="form-control" id="producto-sag" name="producto-sag" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tipo-mascota" class="form-label">Tipo de mascota:</label>
-                                    <input type="text" class="form-control" id="tipo-mascota" name="tipo-mascota" required>
+                                    <label for="cantidad-sag" class="form-label">Cantidad:</label>
+                                    <input type="number" class="form-control" id="cantidad-sag" name="cantidad-sag" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pais-origen-sag" class="form-label">País de origen:</label>
+                                    <input type="text" class="form-control" id="pais-origen-sag" name="pais-origen-sag" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Registrar</button>
                             </form>
-                            <div id="mensaje-tramite-mascota" class="mt-3"></div>
+                            <div id="mensaje-declaracion-sag" class="mt-3"></div>
                         </div>
                     </div>
                 </div>
@@ -192,7 +196,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tramite_mascota.js"></script>
+    <script src="js/declaracion_sag.js"></script>
     <script src="js/sidebar.js"></script>
     <script>
     // Mostrar nombre y correo en el banner superior desde el token
@@ -233,14 +237,14 @@
         }
         // Sidebar dinámico igual que dashboard
         if (typeof generarEnlacesDashboard === 'function') {
-            generarEnlacesDashboard('tramite_mascota');
+            generarEnlacesDashboard('declaracion_sag');
         } else if (typeof generarEnlacesSidebar === 'function') {
-            generarEnlacesSidebar('tramite_mascota');
+            generarEnlacesSidebar('declaracion_sag');
         }
-        // Ocultar el enlace de Trámite Mascota en el sidebar si existe
+        // Ocultar el enlace de Declaración SAG en el sidebar si existe
         setTimeout(function() {
-            var enlaceMascota = document.getElementById('enlace-tramite-mascota');
-            if (enlaceMascota) enlaceMascota.style.display = 'none';
+            var enlaceSAG = document.getElementById('enlace-sag');
+            if (enlaceSAG) enlaceSAG.style.display = 'none';
         }, 200);
     });
     </script>

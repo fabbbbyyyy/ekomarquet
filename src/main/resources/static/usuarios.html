@@ -1,17 +1,16 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trámite Mascota - Aduanas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Administración de Usuarios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/tooplate-mini-finance.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header replicado de dashboard.html -->
     <header class="navbar sticky-top flex-md-nowrap">
         <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
             <a class="navbar-brand" href="index.html">
@@ -23,50 +22,38 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0" action="#" method="get" role="form">
-            <input class="form-control" name="search" type="text" placeholder="Buscar" aria-label="Buscar">
+            <input class="form-control" name="search" type="text" placeholder="Search" aria-label="Search">
         </form>
         <div class="navbar-nav me-lg-2">
             <div class="nav-item text-nowrap d-flex align-items-center">
-                <!-- Notificaciones y menú de usuario igual que en gestion_roles.html -->
                 <div class="dropdown ps-3">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
                         <i class="bi-bell"></i>
                         <span class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
+                            <span class="visually-hidden">Nuevas alertas</span>
                         </span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow" aria-labelledby="navbarLightDropdownMenuLink">
-                        <small>Notifications</small>
-                        <li class="notifications-block border-bottom pb-2 mb-2">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                    <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                        <small>Notificaciones</small>
+                        <li class="notifications-block border-bottom pb-2 mb-2 notifications-block">
+                            <a class="dropdown-item d-flex  align-items-center" href="#">
                                 <div class="notifications-icon-wrap bg-success">
                                     <i class="notifications-icon bi-check-circle-fill"></i>
                                 </div>
                                 <div>
-                                    <span>Your account has been created successfuly.</span>
-                                    <p>12 days ago</p>
+                                    <span>Tu cuenta ha sido creada exitosamente.</span>
+                                    <p>Hace 12 días</p>
                                 </div>
                             </a>
                         </li>
-                        <li class="notifications-block border-bottom pb-2 mb-2">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="notifications-icon-wrap bg-info">
-                                    <i class="notifications-icon bi-folder"></i>
-                                </div>
-                                <div>
-                                    <span>Please check. We have sent a Daily report.</span>
-                                    <p>10 days ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notifications-block">
+                        <li class="notifications-block notifications-block">
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="notifications-icon-wrap bg-danger">
                                     <i class="notifications-icon bi-question-circle"></i>
                                 </div>
                                 <div>
-                                    <span>Account verification failed.</span>
-                                    <p>1 hour ago</p>
+                                    <span>La verificación de la cuenta falló.</span>
+                                    <p>Hace 1 hora</p>
                                 </div>
                             </a>
                         </li>
@@ -83,36 +70,6 @@
                                     <a class="dropdown-item text-center" href="#">
                                         <img src="images/social/search.png" class="profile-image img-fluid" alt="">
                                         <span class="d-block">Google</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/spotify.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Spotify</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/telegram.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Telegram</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/snapchat.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Snapchat</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/tiktok.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Tiktok</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/youtube.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Youtube</span>
                                     </a>
                                 </div>
                             </div>
@@ -144,58 +101,96 @@
             </div>
         </div>
     </header>
+    <!-- Sidebar replicado de dashboard.html, sin el enlace de Administrar Usuarios -->
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
                 <div class="position-sticky py-4 px-3 sidebar-sticky">
                     <ul class="nav flex-column h-100" id="sidebar-links">
-                        <!-- Los enlaces de navegación se generarán dinámicamente por JS -->
+                        <!-- Sidebar generado dinámicamente por sidebar.js -->
                     </ul>
                 </div>
             </nav>
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                 <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Trámite de Mascota</h1>
+                    <h1 class="h2 mb-0">Usuarios</h1>
+                    <small class="text-muted">Administración de usuarios registrados</small>
                 </div>
                 <div class="row my-4">
-                    <div class="col-lg-8 col-12 mx-auto">
+                    <div class="col-lg-12 col-12">
                         <div class="custom-block bg-white">
-                            <div id="usuario-autenticado" class="mb-3"></div>
-                            <h5 class="mb-4">Registrar Trámite de Mascota</h5>
-                            <form id="form-tramite-mascota">
-                                <div class="mb-3">
-                                    <label for="nombre-mascota" class="form-label">Nombre de la mascota:</label>
-                                    <input type="text" class="form-control" id="nombre-mascota" name="nombre-mascota" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tipo-mascota" class="form-label">Tipo de mascota:</label>
-                                    <input type="text" class="form-control" id="tipo-mascota" name="tipo-mascota" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Registrar</button>
-                            </form>
-                            <div id="mensaje-tramite-mascota" class="mt-3"></div>
-                        </div>
-                    </div>
-                </div>
-                <footer class="site-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-12">
-                                <p class="copyright-text">Copyright © Aduanas 2048
-                                - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a></p>
+                            <h5 class="mb-4">Lista de Usuarios</h5>
+                            <div class="table-responsive">
+                                <table class="account-table table" id="tabla-usuarios">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col">Rol</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Usuarios serán insertados aquí por JS -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </footer>
+                </div>
             </main>
         </div>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tramite_mascota.js"></script>
     <script src="js/sidebar.js"></script>
+    <script src="js/app.js"></script>
     <script>
-    // Mostrar nombre y correo en el banner superior desde el token
+    // Eliminar el enlace de Administrar Usuarios del sidebar
+    document.addEventListener('DOMContentLoaded', function() {
+        // Esperar a que sidebar.js genere los enlaces
+        setTimeout(function() {
+            var enlaceUsuarios = document.getElementById('enlace-usuarios');
+            if (enlaceUsuarios && enlaceUsuarios.parentNode) {
+                enlaceUsuarios.parentNode.remove();
+            }
+        }, 100);
+    });
+    // Obtener y mostrar usuarios desde el backend usando app.js
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof obtenerUsuarios === 'function') {
+            obtenerUsuarios(function(usuarios) {
+                var getNombreRol = function(rolId) {
+                    switch (rolId) {
+                        case 1: return 'Administrador';
+                        case 2: return 'Inspector';
+                        case 3: return 'Funcionario';
+                        case 4: return 'Viajero';
+                        case 5: return 'Transportista';
+                        default: return 'Usuario';
+                    }
+                };
+                var tbody = document.querySelector('#tabla-usuarios tbody');
+                tbody.innerHTML = '';
+                if (!usuarios || usuarios.length === 0) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<td colspan="4" class="text-center">No hay usuarios para mostrar</td>';
+                    tbody.appendChild(tr);
+                    return;
+                }
+                usuarios.forEach(function(usuario) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${usuario.id}</td><td>${usuario.nombre}</td><td>${usuario.correo}</td><td>${getNombreRol(usuario.rolId)}</td>`;
+                    tbody.appendChild(tr);
+                });
+            });
+        } else {
+            // Si app.js no está cargado, mostrar error
+            var tbody = document.querySelector('#tabla-usuarios tbody');
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center text-danger">Error: No se pudo cargar el script de usuarios</td></tr>';
+        }
+    });
+    // Script para mostrar nombre y correo en el header igual que en dashboard.html
     function parseJwt(token) {
         try {
             return JSON.parse(atob(token.split('.')[1]));
@@ -222,26 +217,15 @@
                 }
             }
         }
-        // Logout desde el sidebar
-        var sidebarLogout = document.getElementById('dropdown-logout-btn');
-        if (sidebarLogout) {
-            sidebarLogout.addEventListener('click', function(e) {
+        // Botón logout del dropdown
+        var logoutBtn = document.getElementById('dropdown-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 localStorage.removeItem('jwt');
                 window.location.href = '/login.html';
             });
         }
-        // Sidebar dinámico igual que dashboard
-        if (typeof generarEnlacesDashboard === 'function') {
-            generarEnlacesDashboard('tramite_mascota');
-        } else if (typeof generarEnlacesSidebar === 'function') {
-            generarEnlacesSidebar('tramite_mascota');
-        }
-        // Ocultar el enlace de Trámite Mascota en el sidebar si existe
-        setTimeout(function() {
-            var enlaceMascota = document.getElementById('enlace-tramite-mascota');
-            if (enlaceMascota) enlaceMascota.style.display = 'none';
-        }, 200);
     });
     </script>
     <style>

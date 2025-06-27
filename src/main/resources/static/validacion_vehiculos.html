@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Validación Mascotas - Aduanas</title>
+    <title>Validación Registros - Aduanas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
@@ -23,13 +23,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0" action="#" method="get" role="form">
-        <input class="form-control" name="search" type="text" placeholder="Buscar" aria-label="Buscar">
+        <input class="form-control" name="search" type="text" placeholder="Search" aria-label="Search">
     </form>
     <div class="navbar-nav me-lg-2">
         <div class="nav-item text-nowrap d-flex align-items-center">
             <div class="dropdown ps-3">
                 <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
                     <i class="bi-bell"></i>
+                    <span class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow" aria-labelledby="navbarLightDropdownMenuLink">
                     <small>Notificaciones</small>
@@ -45,6 +48,53 @@
                         </a>
                     </li>
                 </ul>
+            </div>
+            <div class="dropdown ps-1">
+                <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-social bg-white shadow">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/search.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Google</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/spotify.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Spotify</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/telegram.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Telegram</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/snapchat.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Snapchat</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/tiktok.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Tiktok</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <a class="dropdown-item text-center" href="#">
+                                    <img src="images/social/youtube.png" class="profile-image img-fluid" alt="">
+                                    <span class="d-block">Youtube</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="dropdown px-3">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,41 +127,44 @@
             <div class="position-sticky py-4 px-3 sidebar-sticky">
                 <ul class="nav flex-column h-100" id="sidebar-links">
                     <!-- Los enlaces de navegación se generarán dinámicamente por JS -->
-                    <li class="nav-item" id="enlace-validacion-mascota" style="display:none;"></li>
                 </ul>
             </div>
         </nav>
         <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
-            <div id="contenido-validacion-mascotas">
-                <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Validación de Mascotas</h1>
-                    <small class="text-muted">Panel de validación de trámites de mascotas</small>
-                </div>
-                <div class="row my-4">
-                    <div class="col-lg-12 col-12">
-                        <div class="custom-block bg-white">
-                            <div id="usuario-autenticado" class="mb-3"></div>
-                            <h5 class="mb-4">Trámites de Mascotas</h5>
-                            <div class="table-responsive">
-                                <div id="tramites-mascotas"></div>
-                            </div>
-                            <div id="panel-accion-mascota" class="mt-4">
-                                <label for="accion-id">ID de mascota:</label>
-                                <input type="text" id="accion-id" name="accion-id"><br><br>
-                                <button id="btn-aceptar" type="button">Aceptar</button>
-                                <button id="btn-rechazar" type="button" style="margin-left:10px;">Rechazar</button>
-                                <div id="accion-resultado" style="margin-top:10px;color:green;"></div>
-                            </div>
+            <div class="title-group mb-3">
+                <h1 class="h2 mb-0">Validación de Vehículos</h1>
+                <small class="text-muted">Panel de validación de trámites de vehículos</small>
+            </div>
+            <div class="row my-4">
+                <div class="col-lg-12 col-12">
+                    <div class="custom-block bg-white">
+                        <div id="usuario-autenticado" class="mb-3"></div>
+                        <h5 class="mb-4">Trámites de Vehículos</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered align-middle" id="tabla-tramites-vehiculos">
+                                <!-- La tabla se llenará dinámicamente por JS -->
+                            </table>
                         </div>
+                        <div id="controles-vehiculos"></div>
                     </div>
                 </div>
+            </div>
+            <div id="contenido-validacion-registros" style="display:none;">
+                <form id="form-tramite-vehiculo">
+                    <label for="patente">Patente:</label>
+                    <input type="text" id="patente" name="patente" required><br>
+                    <label for="tipo-vehiculo">Tipo de vehículo:</label>
+                    <input type="text" id="tipo-vehiculo" name="tipo-vehiculo" required><br>
+                    <button type="submit">Registrar</button>
+                </form>
+                <div id="mensaje-tramite-vehiculo"></div>
             </div>
         </main>
     </div>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/validacion_mascotas.js"></script>
+<script src="js/validacion_vehiculos.js"></script>
 <script src="js/sidebar.js"></script>
 <script>
     function parseJwt(token) {
@@ -148,8 +201,6 @@
                 window.location.href = '/login.html';
             });
         }
-        var enlaceValidacionMascota = document.getElementById('enlace-validacion-mascota');
-        if (enlaceValidacionMascota) enlaceValidacionMascota.style.display = 'none';
     });
 </script>
 <style>
