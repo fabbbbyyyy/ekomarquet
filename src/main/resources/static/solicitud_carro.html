@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trámite Mascota - Aduanas</title>
+    <title>Solicitud de Préstamo de Carro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
@@ -32,30 +32,19 @@
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarLightDropdownMenuLink">
                         <i class="bi-bell"></i>
                         <span class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
+                            <span class="visually-hidden">Nuevas alertas</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow" aria-labelledby="navbarLightDropdownMenuLink">
-                        <small>Notifications</small>
+                        <small>Notificaciones</small>
                         <li class="notifications-block border-bottom pb-2 mb-2">
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="notifications-icon-wrap bg-success">
                                     <i class="notifications-icon bi-check-circle-fill"></i>
                                 </div>
                                 <div>
-                                    <span>Your account has been created successfuly.</span>
-                                    <p>12 days ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notifications-block border-bottom pb-2 mb-2">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="notifications-icon-wrap bg-info">
-                                    <i class="notifications-icon bi-folder"></i>
-                                </div>
-                                <div>
-                                    <span>Please check. We have sent a Daily report.</span>
-                                    <p>10 days ago</p>
+                                    <span>Tu cuenta ha sido creada exitosamente.</span>
+                                    <p>Hace 12 días</p>
                                 </div>
                             </a>
                         </li>
@@ -65,8 +54,8 @@
                                     <i class="notifications-icon bi-question-circle"></i>
                                 </div>
                                 <div>
-                                    <span>Account verification failed.</span>
-                                    <p>1 hour ago</p>
+                                    <span>La verificación de la cuenta falló.</span>
+                                    <p>Hace 1 hora</p>
                                 </div>
                             </a>
                         </li>
@@ -83,36 +72,6 @@
                                     <a class="dropdown-item text-center" href="#">
                                         <img src="images/social/search.png" class="profile-image img-fluid" alt="">
                                         <span class="d-block">Google</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/spotify.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Spotify</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/telegram.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Telegram</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/snapchat.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Snapchat</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/tiktok.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Tiktok</span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <a class="dropdown-item text-center" href="#">
-                                        <img src="images/social/youtube.png" class="profile-image img-fluid" alt="">
-                                        <span class="d-block">Youtube</span>
                                     </a>
                                 </div>
                             </div>
@@ -155,25 +114,58 @@
             </nav>
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                 <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Trámite de Mascota</h1>
+                    <h1 class="h2 mb-0">Solicitud de Préstamo de Carro</h1>
                 </div>
                 <div class="row my-4">
                     <div class="col-lg-8 col-12 mx-auto">
                         <div class="custom-block bg-white">
                             <div id="usuario-autenticado" class="mb-3"></div>
-                            <h5 class="mb-4">Registrar Trámite de Mascota</h5>
-                            <form id="form-carros-mascota">
+                            <h5 class="mb-4">Registrar Préstamo de Carro</h5>
+                            <form id="form-solicitud-carro">
                                 <div class="mb-3">
-                                    <label for="nombre-mascota" class="form-label">Nombre de la mascota:</label>
-                                    <input type="text" class="form-control" id="nombre-mascota" name="nombre-mascota" required>
+                                    <label for="rut-docente" class="form-label">RUT del docente (sin dígito verificador):</label>
+                                    <input type="text" class="form-control" id="rut-docente" name="rut-docente" required autocomplete="off" pattern="[0-9.]+">
+                                    <div id="rut-error" class="text-danger small mt-1" style="display:none;"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tipo-mascota" class="form-label">Tipo de mascota:</label>
-                                    <input type="text" class="form-control" id="tipo-mascota" name="tipo-mascota" required>
+                                    <label for="nombre-docente" class="form-label">Nombre del docente:</label>
+                                    <input type="text" class="form-control" id="nombre-docente" name="nombre-docente" required autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre-carro" class="form-label">Nombre del carro:</label>
+                                    <select class="form-select" id="nombre-carro" name="nombre-carro" required></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cantidad-equipos" class="form-label">Cantidad de equipos:</label>
+                                    <input type="number" class="form-control" id="cantidad-equipos" name="cantidad-equipos" required min="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sala" class="form-label">Sala:</label>
+                                    <input type="text" class="form-control" id="sala" name="sala" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha-dia" class="form-label">Fecha del préstamo:</label>
+                                    <input type="date" class="form-control" id="fecha-dia" name="fecha-dia" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hora-prestamo" class="form-label">Hora de préstamo:</label>
+                                    <input type="datetime-local" class="form-control" id="hora-prestamo" name="hora-prestamo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hora-entrega" class="form-label">Hora de entrega:</label>
+                                    <input type="datetime-local" class="form-control" id="hora-entrega" name="hora-entrega" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre-responsable" class="form-label">Nombre del responsable:</label>
+                                    <input type="text" class="form-control" id="nombre-responsable" name="nombre-responsable" required readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="estado-prestamo" class="form-label">Estado del préstamo:</label>
+                                    <input type="text" class="form-control" id="estado-prestamo" name="estado-prestamo" value="PRESTADO" readonly>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Registrar</button>
                             </form>
-                            <div id="mensaje-carros-mascota" class="mt-3"></div>
+                            <div id="mensaje-solicitud-carro" class="mt-3"></div>
                         </div>
                     </div>
                 </div>
@@ -192,7 +184,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tramite_mascota.js"></script>
+    <script src="js/solicitud_carro.js"></script>
     <script src="js/sidebar.js"></script>
     <script>
     // Mostrar nombre y correo en el banner superior desde el token
@@ -223,7 +215,7 @@
             }
         }
         // Logout desde el sidebar
-        var sidebarLogout = document.getElementById('dropdown-logout-btn');
+        var sidebarLogout = document.getElementById('sidebar-logout-btn');
         if (sidebarLogout) {
             sidebarLogout.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -233,14 +225,14 @@
         }
         // Sidebar dinámico igual que dashboard
         if (typeof generarEnlacesDashboard === 'function') {
-            generarEnlacesDashboard('tramite_mascota');
+            generarEnlacesDashboard('solicitud_carro');
         } else if (typeof generarEnlacesSidebar === 'function') {
-            generarEnlacesSidebar('tramite_mascota');
+            generarEnlacesSidebar('solicitud_carro');
         }
-        // Ocultar el enlace de Trámite Mascota en el sidebar si existe
+        // Ocultar el enlace de Solicitud Carro en el sidebar si existe
         setTimeout(function() {
-            var enlaceMascota = document.getElementById('enlace-carros-mascota');
-            if (enlaceMascota) enlaceMascota.style.display = 'none';
+            var enlaceSolicitudCarro = document.getElementById('enlace-solicitud-carro');
+            if (enlaceSolicitudCarro) enlaceSolicitudCarro.style.display = 'none';
         }, 200);
     });
     </script>
