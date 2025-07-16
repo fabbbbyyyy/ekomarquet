@@ -17,14 +17,25 @@ document.addEventListener('DOMContentLoaded', function() {
         mensaje.textContent = '';
         const nombre = document.getElementById('nombre-mascota').value.trim();
         const tipo = document.getElementById('tipo-mascota').value.trim();
-        if (!nombre || !tipo) {
+        const transporte = document.getElementById('transporte-mascota').value.trim();
+        const microchip = document.getElementById('microchip-mascota').value.trim();
+        const peso = document.getElementById('peso-mascota').value.trim();
+        const rutDuenio = document.getElementById('rut-duenio').value.trim();
+        const certificadoSalud = document.getElementById('certificado-salud').checked ? 'si' : 'no';
+        const cartillaVacunacion = document.getElementById('cartilla-vacunacion').checked ? 'si' : 'no';
+        if (!nombre || !tipo || !transporte || !microchip || !peso || !rutDuenio) {
             mensaje.style.color = 'red';
-            mensaje.textContent = 'Debe ingresar nombre y tipo de la mascota.';
+            mensaje.textContent = 'Debe completar todos los campos obligatorios.';
+            return;
+        }
+        if (isNaN(Number(peso)) || Number(peso) <= 0) {
+            mensaje.style.color = 'red';
+            mensaje.textContent = 'El peso debe ser un número mayor a 0.';
             return;
         }
         const tramite = {
             tipoTramite: 4,
-            descripcion: `Mascota: ${nombre}, Tipo: ${tipo}`,
+            descripcion: `Mascota: ${nombre}, Tipo: ${tipo}, Transporte: ${transporte}, Microchip: ${microchip}, Peso: ${peso}, RUT Dueño: ${rutDuenio}, Certificado Salud: ${certificadoSalud}, Cartilla Vacunación: ${cartillaVacunacion}`,
             usuario: { id: userId },
             fechaCreacion: new Date().toISOString(),
             estado: 'NO_REVISADO'
