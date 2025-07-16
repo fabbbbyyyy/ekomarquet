@@ -18,14 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const patente = document.getElementById('patente-vehiculo').value.trim();
         const marca = document.getElementById('marca-vehiculo').value.trim();
         const modelo = document.getElementById('modelo-vehiculo').value.trim();
-        if (!patente || !marca || !modelo) {
+        const anio = document.getElementById('anio-vehiculo').value.trim();
+        const chasis = document.getElementById('chasis-vehiculo').value.trim();
+        const propietarioNombre = document.getElementById('propietario-nombre').value.trim();
+        const propietarioRut = document.getElementById('propietario-rut').value.trim();
+        if (!patente || !marca || !modelo || !anio || !chasis || !propietarioNombre || !propietarioRut) {
             mensaje.style.color = 'red';
-            mensaje.textContent = 'Debe ingresar patente, marca y modelo del vehículo.';
+            mensaje.textContent = 'Debe completar todos los campos obligatorios.';
             return;
         }
         const tramite = {
             tipoTramite: 2,
-            descripcion: `Patente: ${patente}, Marca: ${marca}, Modelo: ${modelo}`,
+            descripcion: `Patente: ${patente}, Marca: ${marca}, Modelo: ${modelo}, Año: ${anio}, Chasis: ${chasis}, Propietario registrado: ${propietarioNombre}, RUT propietario: ${propietarioRut}`,
             usuario: { id: userId },
             fechaCreacion: new Date().toISOString(),
             estado: 'NO_REVISADO'

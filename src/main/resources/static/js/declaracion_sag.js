@@ -18,14 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const producto = document.getElementById('producto-sag').value.trim();
         const cantidad = document.getElementById('cantidad-sag').value.trim();
         const pais = document.getElementById('pais-origen-sag').value.trim();
-        if (!producto || !cantidad || !pais) {
+        const motivo = document.getElementById('motivo-traslado-sag').value.trim();
+        const tipoTransporte = document.getElementById('tipo-transporte-sag').value.trim();
+        if (!producto || !cantidad || !pais || !motivo || !tipoTransporte) {
             mensaje.style.color = 'red';
-            mensaje.textContent = 'Debe ingresar producto, cantidad y país de origen.';
+            mensaje.textContent = 'Debe ingresar Todos los campos.';
             return;
         }
         const tramite = {
             tipoTramite: 3,
-            descripcion: `Producto: ${producto}, Cantidad: ${cantidad}, País de origen: ${pais}`,
+            descripcion: `Producto: ${producto}, Cantidad: ${cantidad}, País de origen: ${pais}, Motivo traslado: ${motivo}, Tipo de transporte: ${tipoTransporte}`,
             usuario: { id: userId },
             fechaCreacion: new Date().toISOString(),
             estado: 'NO_REVISADO'
