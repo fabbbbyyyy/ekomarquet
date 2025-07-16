@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
         mensaje.textContent = '';
         const nombre = document.getElementById('nombre-menor').value;
         const edad = document.getElementById('edad-menor').value;
+        const rut = document.getElementById('rut-menor').value;
+        const documento = document.getElementById('doc-menor').value;
+        const visa = document.getElementById('visa-menor').checked ? 'si' : 'no';
+        if (Number(edad) >= 18) {
+            mensaje.style.color = 'red';
+            mensaje.textContent = 'El menor ya es mayor de edad. Solo se permiten menores de 18 años.';
+            return;
+        }
         const tramite = {
             tipoTramite: 1,
-            descripcion: `Nombre: ${nombre}, Edad: ${edad}`,
+            descripcion: `Nombre: ${nombre}, Edad: ${edad}, RUT: ${rut}, Documento: ${documento}, Visa: ${visa}`,
             usuario: { id: userId },
             fechaCreacion: new Date().toISOString(),
             estado: 'NO_REVISADO'
