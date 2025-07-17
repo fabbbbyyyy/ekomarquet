@@ -95,6 +95,23 @@
                             <div class="table-responsive">
                                 <div id="tramites-mascotas"></div>
                             </div>
+                            <!-- Modal para ver detalles del trámite -->
+                            <div class="modal fade" id="modal-detalle-tramite" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDetalleLabel">Detalles del Trámite de Mascota</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                  </div>
+                                  <div class="modal-body" id="modal-detalle-body">
+                                    <!-- Los detalles se llenan por JS -->
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             <div id="panel-accion-mascota" class="mt-4">
                                 <label for="accion-id">ID de mascota:</label>
                                 <input type="text" id="accion-id" name="accion-id"><br><br>

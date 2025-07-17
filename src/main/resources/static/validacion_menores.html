@@ -93,6 +93,23 @@
                         <div class="table-responsive">
                             <div id="tramites-menores"></div>
                         </div>
+                        <!-- Modal para ver detalles del trámite de menor -->
+                        <div class="modal fade" id="modal-detalle-menor" tabindex="-1" aria-labelledby="modalDetalleMenorLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalDetalleMenorLabel">Detalles del Trámite de Menor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                              </div>
+                              <div class="modal-body" id="modal-detalle-menor-body">
+                                <!-- Los detalles se llenan por JS -->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div id="panel-accion-menor" class="mt-4">
                             <label for="accion-id-menor">ID de trámite:</label>
                             <input type="text" id="accion-id-menor" name="accion-id-menor"><br><br>

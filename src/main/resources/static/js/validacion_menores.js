@@ -29,18 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const div = document.getElementById('tramites-menores');
         let html = '';
         if (!tramites.length) {
-            html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody><tr><td colspan="6" class="text-center">No hay trámites de menores registrados.</td></tr></tbody></table>`;
+            html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead><tbody><tr><td colspan="7" class="text-center">No hay trámites de menores registrados.</td></tr></tbody></table>`;
             idsMenoresValidos = [];
             div.innerHTML = html;
             return;
         }
         idsMenoresValidos = tramites.map(t => t.id);
-        html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
-        tramites.forEach(t => {
-            // Suponiendo que la descripción es "Nombre: X, Edad: Y"
+        html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Usuario</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead><tbody>';
+        tramites.forEach((t, idx) => {
             let nombre = '', edad = '';
             if (t.descripcion) {
-                const match = t.descripcion.match(/Nombre:\s*([^,]+),\s*Edad:\s*(.+)/i);
+                const match = t.descripcion.match(/Nombre:\s*([^,]+),\s*Edad:\s*([^,]+)/i);
                 if (match) {
                     nombre = match[1].trim();
                     edad = match[2].trim();
@@ -48,10 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     nombre = t.descripcion;
                 }
             }
-            html += `<tr><td>${t.id}</td><td>${nombre}</td><td>${edad}</td><td>${t.usuario?.nombre || t.usuario?.id || ''}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
+            html += `<tr><td>${t.id}</td><td>${nombre}</td><td>${edad}</td><td>${t.usuario?.nombre || t.usuario?.id || ''}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleTramiteMenor(${idx})'>Ver detalles</button></td></tr>`;
         });
         html += '</tbody></table>';
         div.innerHTML = html;
+    }
+
+    window.mostrarDetalleTramiteMenor = function(idx) {
+        const tramite = tramitesMenoresCache[idx];
+        if (!tramite) return;
+        let detalles = `<div class='mb-2'><strong>ID:</strong> ${tramite.id}</div>`;
+        detalles += `<div class='mb-2'><strong>Usuario:</strong> ${tramite.usuario?.nombre || tramite.usuario?.id || ''}</div>`;
+        detalles += `<div class='mb-2'><strong>Fecha:</strong> ${tramite.fechaCreacion || ''}</div>`;
+        detalles += `<div class='mb-2'><strong>Estado:</strong> ${tramite.estado || 'PENDIENTE'}</div>`;
+        if (tramite.descripcion) {
+            const partes = tramite.descripcion.split(',');
+            detalles += '<hr><h6>Datos del Menor</h6>';
+            partes.forEach(p => {
+                const [clave, valor] = p.split(':');
+                if (clave && valor) {
+                    detalles += `<div class='mb-1'><span class='fw-bold'>${clave.trim()}:</span> <span>${valor.trim()}</span></div>`;
+                }
+            });
+        }
+        document.getElementById('modal-detalle-menor-body').innerHTML = detalles;
+        const modal = new bootstrap.Modal(document.getElementById('modal-detalle-menor'));
+        modal.show();
     }
 
     function cargarTramitesMenores() {
