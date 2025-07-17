@@ -145,6 +145,23 @@
                                 <!-- La tabla se llenará dinámicamente por JS -->
                             </table>
                         </div>
+                        <!-- Modal para ver detalles del trámite de vehículo -->
+                        <div class="modal fade" id="modal-detalle-vehiculo" tabindex="-1" aria-labelledby="modalDetalleVehiculoLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalDetalleVehiculoLabel">Detalles del Trámite de Vehículo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                              </div>
+                              <div class="modal-body" id="modal-detalle-vehiculo-body">
+                                <!-- Los detalles se llenan por JS -->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div id="controles-vehiculos"></div>
                     </div>
                 </div>

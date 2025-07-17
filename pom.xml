@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ecomarket-spa.cl</groupId>
-	<artifactId>aduanas</artifactId>
+	<artifactId>carritos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ecomarket-spa</name>
 	<description>Ecomarket SPA</description>
@@ -30,6 +30,10 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>

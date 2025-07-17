@@ -94,6 +94,23 @@
                         <div class="table-responsive">
                             <div id="tramites-declaracion"></div>
                         </div>
+                        <!-- Modal para ver detalles de la declaración -->
+                        <div class="modal fade" id="modal-detalle-declaracion" tabindex="-1" aria-labelledby="modalDetalleDeclaracionLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalDetalleDeclaracionLabel">Detalles de la Declaración SAG</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                              </div>
+                              <div class="modal-body" id="modal-detalle-declaracion-body">
+                                <!-- Los detalles se llenan por JS -->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div id="panel-accion-declaracion" class="mt-4">
                             <label for="accion-id">ID de declaración:</label>
                             <input type="text" id="accion-id" name="accion-id"><br><br>

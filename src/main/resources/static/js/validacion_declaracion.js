@@ -37,15 +37,14 @@ function renderTabla(tramites) {
     const div = document.getElementById('tramites-declaracion');
     let html = '';
     if (!tramites.length) {
-        html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody><tr><td colspan="6" class="text-center">No hay declaraciones SAG registradas.</td></tr></tbody></table>`;
+        html = `<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead><tbody><tr><td colspan="8" class="text-center">No hay declaraciones SAG registradas.</td></tr></tbody></table>`;
         idsValidos = [];
         div.innerHTML = html;
         return;
     }
     idsValidos = tramites.map(t => t.id);
-    html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
-    tramites.forEach(t => {
-        // Suponiendo que la descripción es "Producto: X, Cantidad: Y, País de origen: Z"
+    html = '<table class="table table-striped table-bordered align-middle"><thead><tr><th>ID</th><th>Producto</th><th>Cantidad</th><th>País de origen</th><th>Usuario</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead><tbody>';
+    tramites.forEach((t, idx) => {
         let producto = '', cantidad = '', pais = '';
         if (t.descripcion) {
             const match = t.descripcion.match(/Producto:\s*([^,]+),\s*Cantidad:\s*([^,]+),\s*País de origen:\s*(.+)/i);
@@ -57,10 +56,32 @@ function renderTabla(tramites) {
                 producto = t.descripcion;
             }
         }
-        html += `<tr><td>${t.id}</td><td>${producto}</td><td>${cantidad}</td><td>${pais}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td></tr>`;
+        html += `<tr><td>${t.id}</td><td>${producto}</td><td>${cantidad}</td><td>${pais}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleDeclaracion(${idx})'>Ver detalles</button></td></tr>`;
     });
     html += '</tbody></table>';
     div.innerHTML = html;
+}
+
+window.mostrarDetalleDeclaracion = function(idx) {
+    const tramite = tramitesCache[idx];
+    if (!tramite) return;
+    let detalles = `<div class='mb-2'><strong>ID:</strong> ${tramite.id}</div>`;
+    detalles += `<div class='mb-2'><strong>Usuario:</strong> ${tramite.usuario?.nombre || tramite.usuario?.id || ''}</div>`;
+    detalles += `<div class='mb-2'><strong>Fecha:</strong> ${tramite.fechaCreacion || ''}</div>`;
+    detalles += `<div class='mb-2'><strong>Estado:</strong> ${tramite.estado || 'PENDIENTE'}</div>`;
+    if (tramite.descripcion) {
+        const partes = tramite.descripcion.split(',');
+        detalles += '<hr><h6>Datos de la Declaración</h6>';
+        partes.forEach(p => {
+            const [clave, valor] = p.split(':');
+            if (clave && valor) {
+                detalles += `<div class='mb-1'><span class='fw-bold'>${clave.trim()}:</span> <span>${valor.trim()}</span></div>`;
+            }
+        });
+    }
+    document.getElementById('modal-detalle-declaracion-body').innerHTML = detalles;
+    const modal = new bootstrap.Modal(document.getElementById('modal-detalle-declaracion'));
+    modal.show();
 }
 
 function cargarTramites() {

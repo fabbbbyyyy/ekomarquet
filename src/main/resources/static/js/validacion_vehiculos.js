@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const tabla = document.getElementById('tabla-tramites-vehiculos');
         let html = '';
         if (!tramites || !tramites.length) {
-            html = '<thead><tr><th>ID</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead>';
-            html += '<tbody><tr><td colspan="7" class="text-center">No hay trámites de vehículos registrados.</td></tr></tbody>';
+            html = '<thead><tr><th>ID</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Usuario</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead>';
+            html += '<tbody><tr><td colspan="8" class="text-center">No hay trámites de vehículos registrados.</td></tr></tbody>';
             idsVehiculoValidos = [];
             tabla.innerHTML = html;
             return;
@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>`;
-        tramites.forEach(t => {
-            // Suponiendo que la descripción es "Patente: X, Marca: Y, Modelo: Z"
+        tramites.forEach((t, idx) => {
             let patente = '', marca = '', modelo = '';
             if (t.descripcion) {
                 const match = t.descripcion.match(/Patente:\s*([^,]+),\s*Marca:\s*([^,]+),\s*Modelo:\s*(.+)/i);
@@ -67,10 +67,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${t.usuario?.nombre || t.usuario?.id || ''}</td>
                 <td>${t.fechaCreacion ? new Date(t.fechaCreacion).toLocaleString() : ''}</td>
                 <td>${t.estado || 'PENDIENTE'}</td>
+                <td><button class='btn btn-info btn-sm' onclick='mostrarDetalleVehiculo(${idx})'>Ver detalles</button></td>
             </tr>`;
         });
         html += '</tbody>';
         tabla.innerHTML = html;
+    }
+
+    window.mostrarDetalleVehiculo = function(idx) {
+        const tramite = tramitesVehiculoCache[idx];
+        if (!tramite) return;
+        let detalles = `<div class='mb-2'><strong>ID:</strong> ${tramite.id}</div>`;
+        detalles += `<div class='mb-2'><strong>Usuario:</strong> ${tramite.usuario?.nombre || tramite.usuario?.id || ''}</div>`;
+        detalles += `<div class='mb-2'><strong>Fecha:</strong> ${tramite.fechaCreacion ? new Date(tramite.fechaCreacion).toLocaleString() : ''}</div>`;
+        detalles += `<div class='mb-2'><strong>Estado:</strong> ${tramite.estado || 'PENDIENTE'}</div>`;
+        if (tramite.descripcion) {
+            const partes = tramite.descripcion.split(',');
+            detalles += '<hr><h6>Datos del Vehículo</h6>';
+            partes.forEach(p => {
+                const [clave, valor] = p.split(':');
+                if (clave && valor) {
+                    detalles += `<div class='mb-1'><span class='fw-bold'>${clave.trim()}:</span> <span>${valor.trim()}</span></div>`;
+                }
+            });
+        }
+        document.getElementById('modal-detalle-vehiculo-body').innerHTML = detalles;
+        const modal = new bootstrap.Modal(document.getElementById('modal-detalle-vehiculo'));
+        modal.show();
     }
 
     function cargarTramitesVehiculo() {
@@ -85,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let tramites = await r.json();
             // Si la respuesta es null o vacía, forzar array vacío
             if (!tramites) tramites = [];
+            tramitesVehiculoCache = tramites; // Guardar en caché
             renderTablaVehiculos(tramites);
         })
         .catch(() => {
