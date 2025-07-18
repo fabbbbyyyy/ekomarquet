@@ -92,24 +92,12 @@
     <script src="js/custom.js"></script>
     <script src="js/sidebar.js"></script>
     <script>
-    // Script para generar sidebar y ocultar el botón de "Monitoreo de Demoras"
-    function parseJwt(token) {
-        try {
-            return JSON.parse(atob(token.split('.')[1]));
-        } catch (e) {
-            return null;
-        }
-    }
+    // Función para parsear el JWT y obtener el payload
     document.addEventListener('DOMContentLoaded', function() {
         // Generar sidebar dinámicamente
         if (typeof generarEnlacesDashboard === 'function') {
             generarEnlacesDashboard();
         }
-        // Ocultar el enlace de Monitoreo de Demoras en el sidebar si existe
-        setTimeout(function() {
-            var enlaceMonitoreo = document.getElementById('enlace-monitoreo-demoras');
-            if (enlaceMonitoreo) enlaceMonitoreo.style.display = 'none';
-        }, 200);
         // Mostrar datos de usuario en el banner
         const token = localStorage.getItem('jwt');
         if (token) {

@@ -307,6 +307,12 @@ Bootstrap 5 Dashboard Admin Template
                     return null;
                 }
             }
+                document.addEventListener('DOMContentLoaded', function() {
+        // Generar sidebar dinámicamente
+        if (typeof generarEnlacesDashboard === 'function') {
+            generarEnlacesDashboard();
+        }
+
             document.addEventListener('DOMContentLoaded', function() {
                 const token = localStorage.getItem('jwt');
                 if (token) {

@@ -105,11 +105,6 @@
         if (typeof generarEnlacesDashboard === 'function') {
             generarEnlacesDashboard();
         }
-        // Ocultar el enlace de Análisis IA en el sidebar si existe
-        setTimeout(function() {
-            var enlaceIA = document.getElementById('enlace-analisis-ia');
-            if (enlaceIA) enlaceIA.style.display = 'none';
-        }, 200);
         // Mostrar datos de usuario en el banner
         const token = localStorage.getItem('jwt');
         if (token) {

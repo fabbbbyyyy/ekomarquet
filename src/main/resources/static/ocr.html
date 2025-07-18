@@ -116,11 +116,6 @@
         if (typeof generarEnlacesDashboard === 'function') {
             generarEnlacesDashboard();
         }
-        // Ocultar el enlace de OCR en el sidebar si existe
-        setTimeout(function() {
-            var enlaceOcr = document.getElementById('enlace-ocr');
-            if (enlaceOcr) enlaceOcr.style.display = 'none';
-        }, 200);
         // Mostrar datos de usuario en el banner
         const token = localStorage.getItem('jwt');
         if (token) {

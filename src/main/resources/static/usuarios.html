@@ -146,16 +146,7 @@
     <script src="js/sidebar.js"></script>
     <script src="js/app.js"></script>
     <script>
-    // Eliminar el enlace de Administrar Usuarios del sidebar
-    document.addEventListener('DOMContentLoaded', function() {
-        // Esperar a que sidebar.js genere los enlaces
-        setTimeout(function() {
-            var enlaceUsuarios = document.getElementById('enlace-usuarios');
-            if (enlaceUsuarios && enlaceUsuarios.parentNode) {
-                enlaceUsuarios.parentNode.remove();
-            }
-        }, 100);
-    });
+
     // Obtener y mostrar usuarios desde el backend usando app.js
     document.addEventListener('DOMContentLoaded', function() {
         if (typeof obtenerUsuarios === 'function') {

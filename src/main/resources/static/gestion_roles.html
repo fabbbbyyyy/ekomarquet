@@ -183,19 +183,7 @@
                 window.location.href = '/login.html';
             });
         }
-        // Sidebar dinámico igual que dashboard
-        if (typeof generarEnlacesDashboard === 'function') {
-            generarEnlacesDashboard('gestion_roles');
-        } else if (typeof generarEnlacesSidebar === 'function') {
-            generarEnlacesSidebar('gestion_roles');
-        }
-        // Eliminar el enlace de Gestión de Roles del sidebar si estamos en esta página
-        setTimeout(function() {
-            var enlaceGestionRoles = document.getElementById('enlace-gestion-roles');
-            if (enlaceGestionRoles && enlaceGestionRoles.parentNode) {
-                enlaceGestionRoles.parentNode.remove();
-            }
-        }, 100);
+
         // Botón logout del dropdown (menú usuario arriba a la derecha)
         setTimeout(function() {
             var logoutBtn = document.getElementById('dropdown-logout-btn');
@@ -207,15 +195,6 @@
                 });
             }
         }, 300);
-    });
-    // Asegurar que el enlace de gestión de roles se elimina igual que en usuarios.html
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            var enlaceGestionRoles = document.getElementById('enlace-gestion-roles');
-            if (enlaceGestionRoles && enlaceGestionRoles.parentNode) {
-                enlaceGestionRoles.parentNode.remove();
-            }
-        }, 100);
     });
     </script>
     <style>

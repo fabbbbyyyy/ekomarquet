@@ -99,29 +99,4 @@ function generarEnlacesSidebar() {
 
 document.addEventListener('DOMContentLoaded', function() {
     generarEnlacesSidebar();
-    // Ocultar el enlace de Trámite Menores en el sidebar si existe (para tramite_menores.html)
-    if (window.location.pathname.endsWith('/tramite_menores.html')) {
-        setTimeout(function() {
-            var enlaceMenores = document.getElementById('enlace-menores');
-            if (enlaceMenores) enlaceMenores.style.display = 'none';
-        }, 200);
-    }
-    if (window.location.pathname.endsWith('/validacion_mascotas.html')) {
-        setTimeout(function() {
-            var enlaceValidacionMascotas = document.getElementById('enlace-validacion-mascotas');
-            if (enlaceValidacionMascotas) enlaceValidacionMascotas.style.display = 'none';
-        }, 200);
-    }
-    if (window.location.pathname.endsWith('/validacion_menores.html')) {
-        setTimeout(function() {
-            var enlaceValidacionMenores = document.getElementById('enlace-validacion-menores');
-            if (enlaceValidacionMenores) enlaceValidacionMenores.style.display = 'none';
-        }, 200);
-    }
-    if (window.location.pathname.endsWith('/validacion_vehiculos.html')) {
-        setTimeout(function() {
-            var enlaceValidacionVehiculos = document.getElementById('enlace-validacion-vehiculos');
-            if (enlaceValidacionVehiculos) enlaceValidacionVehiculos.style.display = 'none';
-        }, 200);
-    }
 });

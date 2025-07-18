@@ -105,11 +105,6 @@
         if (typeof generarEnlacesDashboard === 'function') {
             generarEnlacesDashboard();
         }
-        // Ocultar el enlace de Informes en el sidebar si existe
-        setTimeout(function() {
-            var enlaceInformes = document.getElementById('enlace-informes');
-            if (enlaceInformes) enlaceInformes.style.display = 'none';
-        }, 200);
         // Mostrar datos de usuario en el banner
         const token = localStorage.getItem('jwt');
         if (token) {
