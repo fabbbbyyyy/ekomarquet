@@ -47,7 +47,8 @@ function renderTabla(tramites) {
     tramites.forEach((t, idx) => {
         let producto = '', cantidad = '', pais = '';
         if (t.descripcion) {
-            const match = t.descripcion.match(/Producto:\s*([^,]+),\s*Cantidad:\s*([^,]+),\s*País de origen:\s*(.+)/i);
+            // Ajuste: solo capturar el país, sin motivo ni tipo de transporte
+            const match = t.descripcion.match(/Producto:\s*([^,]+),\s*Cantidad:\s*([^,]+),\s*País de origen:\s*([^,]+?)(?:,|$)/i);
             if (match) {
                 producto = match[1].trim();
                 cantidad = match[2].trim();
@@ -56,7 +57,22 @@ function renderTabla(tramites) {
                 producto = t.descripcion;
             }
         }
-        html += `<tr><td>${t.id}</td><td>${producto}</td><td>${cantidad}</td><td>${pais}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleDeclaracion(${idx})'>Ver detalles</button></td></tr>`;
+        // Formatear la fecha a formato legible (ej: 17/07/2025 14:30)
+        let fechaLegible = '';
+        if (t.fechaCreacion) {
+            const fecha = new Date(t.fechaCreacion);
+            if (!isNaN(fecha.getTime())) {
+                const dia = String(fecha.getDate()).padStart(2, '0');
+                const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                const anio = fecha.getFullYear();
+                const horas = String(fecha.getHours()).padStart(2, '0');
+                const minutos = String(fecha.getMinutes()).padStart(2, '0');
+                fechaLegible = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+            } else {
+                fechaLegible = t.fechaCreacion;
+            }
+        }
+        html += `<tr><td>${t.id}</td><td>${producto}</td><td>${cantidad}</td><td>${pais}</td><td>${t.usuario?.nombre || t.usuario?.id}</td><td>${fechaLegible}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleDeclaracion(${idx})'>Ver detalles</button></td></tr>`;
     });
     html += '</tbody></table>';
     div.innerHTML = html;

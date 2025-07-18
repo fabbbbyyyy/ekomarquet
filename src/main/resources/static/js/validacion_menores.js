@@ -47,7 +47,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     nombre = t.descripcion;
                 }
             }
-            html += `<tr><td>${t.id}</td><td>${nombre}</td><td>${edad}</td><td>${t.usuario?.nombre || t.usuario?.id || ''}</td><td>${t.fechaCreacion || ''}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleTramiteMenor(${idx})'>Ver detalles</button></td></tr>`;
+            // Formatear la fecha a dd/mm/yyyy hh:mm
+            let fechaLegible = '';
+            if (t.fechaCreacion) {
+                const fecha = new Date(t.fechaCreacion);
+                if (!isNaN(fecha.getTime())) {
+                    const dia = String(fecha.getDate()).padStart(2, '0');
+                    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                    const anio = fecha.getFullYear();
+                    const horas = String(fecha.getHours()).padStart(2, '0');
+                    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+                    fechaLegible = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+                } else {
+                    fechaLegible = t.fechaCreacion;
+                }
+            }
+            html += `<tr><td>${t.id}</td><td>${nombre}</td><td>${edad}</td><td>${t.usuario?.nombre || t.usuario?.id || ''}</td><td>${fechaLegible}</td><td>${t.estado || 'PENDIENTE'}</td><td><button class='btn btn-info btn-sm' onclick='mostrarDetalleTramiteMenor(${idx})'>Ver detalles</button></td></tr>`;
         });
         html += '</tbody></table>';
         div.innerHTML = html;

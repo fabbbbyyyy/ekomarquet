@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
         tramites.forEach((t, idx) => {
             let patente = '', marca = '', modelo = '';
             if (t.descripcion) {
-                const match = t.descripcion.match(/Patente:\s*([^,]+),\s*Marca:\s*([^,]+),\s*Modelo:\s*(.+)/i);
+                // Solo mostrar el modelo, no toda la información posterior
+                const match = t.descripcion.match(/Patente:\s*([^,]+),\s*Marca:\s*([^,]+),\s*Modelo:\s*([^,]+?)(?:,|$)/i);
                 if (match) {
                     patente = match[1].trim();
                     marca = match[2].trim();
@@ -59,13 +60,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     patente = t.descripcion;
                 }
             }
+            // Formatear la fecha a dd/mm/yyyy hh:mm
+            let fechaLegible = '';
+            if (t.fechaCreacion) {
+                const fecha = new Date(t.fechaCreacion);
+                if (!isNaN(fecha.getTime())) {
+                    const dia = String(fecha.getDate()).padStart(2, '0');
+                    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                    const anio = fecha.getFullYear();
+                    const horas = String(fecha.getHours()).padStart(2, '0');
+                    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+                    fechaLegible = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+                } else {
+                    fechaLegible = t.fechaCreacion;
+                }
+            }
             html += `<tr>
                 <td>${t.id}</td>
                 <td>${patente}</td>
                 <td>${marca}</td>
                 <td>${modelo}</td>
                 <td>${t.usuario?.nombre || t.usuario?.id || ''}</td>
-                <td>${t.fechaCreacion ? new Date(t.fechaCreacion).toLocaleString() : ''}</td>
+                <td>${fechaLegible}</td>
                 <td>${t.estado || 'PENDIENTE'}</td>
                 <td><button class='btn btn-info btn-sm' onclick='mostrarDetalleVehiculo(${idx})'>Ver detalles</button></td>
             </tr>`;
